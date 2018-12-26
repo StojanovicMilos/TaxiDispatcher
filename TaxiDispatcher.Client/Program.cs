@@ -14,77 +14,33 @@ namespace TaxiDispatcher.Client
         public static void RunTaxiDispatcher(ILogger logger)
         {
             Scheduler scheduler = new Scheduler();
+            RideOrders[] rideOrders = new RideOrders[]
+            {
+                new RideOrders {Start = 5, Destination = 0, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)},
+                new RideOrders {Start = 0, Destination = 12, RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 9, 0, 0)},
+                new RideOrders {Start = 5, Destination = 0, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)},
+                new RideOrders {Start = 35, Destination = 12, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)}
+            };
 
-            try
+            foreach (var rideOrder in rideOrders)
             {
-                logger.WriteLine("Ordering ride from 5 to 0...");
-                Scheduler.Ride ride = scheduler.OrderRide(5, 0, Constants.City, new DateTime(2018, 1, 1, 23, 0, 0));
-                scheduler.AcceptRide(ride);
-                logger.WriteLine("");
-            }
-            catch (Exception e)
-            {
-                if (e.Message == "There are no available taxi vehicles!")
+                try
                 {
-                    logger.WriteLine(e.Message);
+                    logger.WriteLine(string.Format("Ordering ride from {0} to {1}...", rideOrder.Start, rideOrder.Destination));
+                    Scheduler.Ride ride = scheduler.OrderRide(rideOrder.Start, rideOrder.Destination, rideOrder.RideType, rideOrder.RideDateTime);
+                    scheduler.AcceptRide(ride);
                     logger.WriteLine("");
                 }
-                else
-                    throw;
-            }
-
-            try
-            {
-                logger.WriteLine("Ordering ride from 0 to 12...");
-                Scheduler.Ride ride = scheduler.OrderRide(0, 12, Constants.InterCity, new DateTime(2018, 1, 1, 9, 0, 0));
-                scheduler.AcceptRide(ride);
-                logger.WriteLine("");
-            }
-            catch (Exception e)
-            {
-                if (e.Message == "There are no available taxi vehicles!")
+                catch (Exception e)
                 {
-                    logger.WriteLine(e.Message);
-                    logger.WriteLine("");
+                    if (e.Message == "There are no available taxi vehicles!")
+                    {
+                        logger.WriteLine(e.Message);
+                        logger.WriteLine("");
+                    }
+                    else
+                        throw;
                 }
-                else
-                    throw;
-            }
-
-            try
-            {
-                logger.WriteLine("Ordering ride from 5 to 0...");
-                Scheduler.Ride ride = scheduler.OrderRide(5, 0, Constants.City, new DateTime(2018, 1, 1, 11, 0, 0));
-                scheduler.AcceptRide(ride);
-                logger.WriteLine("");
-            }
-            catch (Exception e)
-            {
-                if (e.Message == "There are no available taxi vehicles!")
-                {
-                    logger.WriteLine(e.Message);
-                    logger.WriteLine("");
-                }
-                else
-                    throw;
-            }
-
-            try
-            {
-                logger.WriteLine("Ordering ride from 35 to 12...");
-                Scheduler.Ride ride = scheduler.OrderRide(35, 12, Constants.City, new DateTime(2018, 1, 1, 11, 0, 0));
-                scheduler.AcceptRide(ride);
-                logger.WriteLine("");
-            }
-            catch (Exception e)
-            {
-                if (e.Message == "There are no available taxi vehicles!")
-                {
-                    logger.WriteLine(e.Message);
-                    logger.WriteLine("");
-                }
-                else
-                    throw;
             }
 
             logger.WriteLine("Driver with ID = 2 earned today:");
