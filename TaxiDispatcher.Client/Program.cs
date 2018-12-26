@@ -16,8 +16,8 @@ namespace TaxiDispatcher.Client
             Scheduler scheduler = new Scheduler();
             RideOrders[] rideOrders = GetRideOrders();
             OrderRides(logger, scheduler, rideOrders);
-            const int TotalCalculationdriverId = 2;
-            int totalEarnings = CalculateTotalEarnings(TotalCalculationdriverId, logger, scheduler);
+            const int TotalEarningsCalculationDriverId = 2;
+            int totalEarnings = CalculateTotalEarnings(TotalEarningsCalculationDriverId, logger, scheduler);
             LogTotalEarnings(logger, totalEarnings);
         }
 
