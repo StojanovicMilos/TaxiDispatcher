@@ -2,7 +2,7 @@
 
 namespace TaxiDispatcher.Client
 {
-    public class RideOrders
+    public class RideOrder
     {
         public int Start { get; set; }
         public int Destination { get; set; }
