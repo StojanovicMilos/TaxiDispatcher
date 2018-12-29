@@ -1,6 +1,7 @@
 ﻿using System;
+using TaxiDispatcher.Client;
 
-namespace TaxiDispatcher.Client.Tests.Logger
+namespace TaxiDispatcher.Tests.Logger
 {
     public class TestLogger : ILogger
     {
