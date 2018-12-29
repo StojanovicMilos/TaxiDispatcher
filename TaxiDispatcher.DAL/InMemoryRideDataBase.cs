@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TaxiDispatcher.DAL
 {
-    public class InMemoryRideDataBase : IDatabase
+    public sealed class InMemoryRideDataBase : IDatabase
     {
-        public static List<Ride> Rides = new List<Ride>();
+        private static List<Ride> Rides = new List<Ride>();
+
+        private InMemoryRideDataBase() { }
+
+        private static readonly Lazy<InMemoryRideDataBase> lazy = new Lazy<InMemoryRideDataBase>(() => new InMemoryRideDataBase(), isThreadSafe: true);
+
+        public static InMemoryRideDataBase Instance { get { return lazy.Value; } }
 
         public void SaveRide(Ride ride)
         {

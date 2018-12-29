@@ -13,7 +13,7 @@ namespace TaxiDispatcher.App
 
         private readonly IDatabase _database;
 
-        public Scheduler() : this(new InMemoryRideDataBase()) { }
+        public Scheduler() : this(InMemoryRideDataBase.Instance) { }
 
         public Scheduler(IDatabase database)
         {
