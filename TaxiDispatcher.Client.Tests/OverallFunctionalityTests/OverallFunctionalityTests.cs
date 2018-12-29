@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using TaxiDispatcher.Tests.Logger;
+using TaxiDispatcher.Tests.HelperClasses;
 
 namespace TaxiDispatcher.Client.Tests.OverallFunctionalityTests
 {

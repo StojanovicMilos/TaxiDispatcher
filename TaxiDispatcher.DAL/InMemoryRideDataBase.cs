@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using static TaxiDispatcher.App.Scheduler;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.DAL
 {
-    public static class InMemoryRideDataBase
+    public class InMemoryRideDataBase : IDatabase
     {
         public static List<Ride> Rides = new List<Ride>();
 
-        public static void SaveRide(Ride ride)
+        public void SaveRide(Ride ride)
         {
             int max_id = Rides.Count == 0 ? 0 : Rides[0].Ride_id;
             foreach (Ride r in Rides)
@@ -20,7 +19,7 @@ namespace TaxiDispatcher.App
             Rides.Add(ride);
         }
 
-        public static Ride GetRide(int id)
+        public Ride GetRide(int id)
         {
             Ride ride = Rides[0];
             bool found = ride.Ride_id == id;
@@ -35,7 +34,7 @@ namespace TaxiDispatcher.App
             return ride;
         }
 
-        public static List<int> GetRide_Ids()
+        public List<int> GetRide_Ids()
         {
             List<int> ids = new List<int>();
             foreach (Ride ride in Rides)
@@ -45,5 +44,23 @@ namespace TaxiDispatcher.App
 
             return ids;
         }
+    }
+
+    public class Taxi
+    {
+        public int Taxi_driver_id { get; set; }
+        public string Taxi_driver_name { get; set; }
+        public string Taxi_company { get; set; }
+        public int Location { get; set; }
+    }
+
+    public class Ride
+    {
+        public int Ride_id { get; set; }
+        public int Location_from { get; set; }
+        public int Location_to { get; set; }
+        public int Taxi_driver_id { get; set; }
+        public string Taxi_driver_name { get; set; }
+        public int Price { get; set; }
     }
 }

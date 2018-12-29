@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.App
 {
@@ -9,6 +10,16 @@ namespace TaxiDispatcher.App
         protected Taxi taxi2 = new Taxi { Taxi_driver_id = 2, Taxi_driver_name = "Nenad", Taxi_company = "Naxi", Location = 4 };
         protected Taxi taxi3 = new Taxi { Taxi_driver_id = 3, Taxi_driver_name = "Dragan", Taxi_company = "Alfa", Location = 6 };
         protected Taxi taxi4 = new Taxi { Taxi_driver_id = 4, Taxi_driver_name = "Goran", Taxi_company = "Gold", Location = 7 };
+
+        private readonly IDatabase _database;
+
+        public Scheduler() : this(new InMemoryRideDataBase()) { }
+
+        public Scheduler(IDatabase database)
+        {
+            _database = database;
+        }
+
         public Ride OrderRide(int location_from, int location_to, int ride_type, DateTime time)
         {
             #region FindingTheBestVehicle 
@@ -92,7 +103,7 @@ namespace TaxiDispatcher.App
 
         public void AcceptRide(Ride ride)
         {
-            InMemoryRideDataBase.SaveRide(ride);
+            _database.SaveRide(ride);
 
             if (taxi1.Taxi_driver_id == ride.Taxi_driver_id)
             {
@@ -120,33 +131,15 @@ namespace TaxiDispatcher.App
         public List<Ride> GetRideList(int driver_id)
         {
             List<Ride> rides = new List<Ride>();
-            List<int> ids = InMemoryRideDataBase.GetRide_Ids();
+            List<int> ids = _database.GetRide_Ids();
             foreach (int id in ids)
             {
-                Ride ride = InMemoryRideDataBase.GetRide(id);
+                Ride ride = _database.GetRide(id);
                 if (ride.Taxi_driver_id == driver_id)
                     rides.Add(ride);
             }
 
             return rides;
-        }
-
-        public class Taxi
-        {
-            public int Taxi_driver_id { get; set; }
-            public string Taxi_driver_name { get; set; }
-            public string Taxi_company { get; set; }
-            public int Location { get; set; }
-        }
-
-        public class Ride
-        {
-            public int Ride_id { get; set; }
-            public int Location_from { get; set; }
-            public int Location_to { get; set; }
-            public int Taxi_driver_id { get; set; }
-            public string Taxi_driver_name { get; set; }
-            public int Price { get; set; }
         }
     }
 }
