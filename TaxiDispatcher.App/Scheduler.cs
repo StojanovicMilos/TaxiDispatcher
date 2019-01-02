@@ -6,14 +6,11 @@ namespace TaxiDispatcher.App
 {
     public class Scheduler
     {
-        protected Taxi taxi1 = new Taxi { Taxi_driver_id = 1, Taxi_driver_name = "Predrag", Taxi_company = "Naxi", Location = 1};
-        protected Taxi taxi2 = new Taxi { Taxi_driver_id = 2, Taxi_driver_name = "Nenad", Taxi_company = "Naxi", Location = 4 };
-        protected Taxi taxi3 = new Taxi { Taxi_driver_id = 3, Taxi_driver_name = "Dragan", Taxi_company = "Alfa", Location = 6 };
-        protected Taxi taxi4 = new Taxi { Taxi_driver_id = 4, Taxi_driver_name = "Goran", Taxi_company = "Gold", Location = 7 };
+
 
         private readonly IDatabase _database;
 
-        public Scheduler() : this(InMemoryRideDataBase.Instance) { }
+        public Scheduler() : this(InMemoryDataBase.Instance) { }
 
         public Scheduler(IDatabase database)
         {
@@ -24,25 +21,25 @@ namespace TaxiDispatcher.App
         {
             #region FindingTheBestVehicle 
 
-            Taxi min_taxi = taxi1;
-            int min_distance = Math.Abs(taxi1.Location - location_from);
+            Taxi min_taxi = _database.Taxis[0];
+            int min_distance = Math.Abs(_database.Taxis[0].Location - location_from);
 
-            if (Math.Abs(taxi2.Location - location_from) < min_distance)
+            if (Math.Abs(_database.Taxis[1].Location - location_from) < min_distance)
             {
-                min_taxi = taxi2;
-                min_distance = Math.Abs(taxi2.Location - location_from);
+                min_taxi = _database.Taxis[1];
+                min_distance = Math.Abs(_database.Taxis[1].Location - location_from);
             }
 
-            if (Math.Abs(taxi3.Location - location_from) < min_distance)
+            if (Math.Abs(_database.Taxis[2].Location - location_from) < min_distance)
             {
-                min_taxi = taxi3;
-                min_distance = Math.Abs(taxi3.Location - location_from);
+                min_taxi = _database.Taxis[2];
+                min_distance = Math.Abs(_database.Taxis[2].Location - location_from);
             }
 
-            if (Math.Abs(taxi4.Location - location_from) < min_distance)
+            if (Math.Abs(_database.Taxis[3].Location - location_from) < min_distance)
             {
-                min_taxi = taxi4;
-                min_distance = Math.Abs(taxi4.Location - location_from);
+                min_taxi = _database.Taxis[3];
+                min_distance = Math.Abs(_database.Taxis[3].Location - location_from);
             }
 
             if (min_distance > 15)
@@ -105,24 +102,24 @@ namespace TaxiDispatcher.App
         {
             _database.SaveRide(ride);
 
-            if (taxi1.Taxi_driver_id == ride.Taxi_driver_id)
+            if (_database.Taxis[0].Taxi_driver_id == ride.Taxi_driver_id)
             {
-                taxi1.Location = ride.Location_to;
+                _database.Taxis[0].Location = ride.Location_to;
             }
 
-            if (taxi2.Taxi_driver_id == ride.Taxi_driver_id)
+            if (_database.Taxis[1].Taxi_driver_id == ride.Taxi_driver_id)
             {
-                taxi2.Location = ride.Location_to;
+                _database.Taxis[1].Location = ride.Location_to;
             }
 
-            if (taxi3.Taxi_driver_id == ride.Taxi_driver_id)
+            if (_database.Taxis[2].Taxi_driver_id == ride.Taxi_driver_id)
             {
-                taxi3.Location = ride.Location_to;
+                _database.Taxis[2].Location = ride.Location_to;
             }
 
-            if (taxi4.Taxi_driver_id == ride.Taxi_driver_id)
+            if (_database.Taxis[3].Taxi_driver_id == ride.Taxi_driver_id)
             {
-                taxi4.Location = ride.Location_to;
+                _database.Taxis[3].Location = ride.Location_to;
             }
 
             Console.WriteLine("Ride accepted, waiting for driver: " + ride.Taxi_driver_name);

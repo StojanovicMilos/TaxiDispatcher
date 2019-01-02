@@ -7,5 +7,6 @@ namespace TaxiDispatcher.DAL
         Ride GetRide(int id);
         List<int> GetRide_Ids();
         void SaveRide(Ride ride);
+        Taxi[] Taxis { get; }
     }
 }

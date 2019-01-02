@@ -3,15 +3,25 @@ using System.Collections.Generic;
 
 namespace TaxiDispatcher.DAL
 {
-    public sealed class InMemoryRideDataBase : IDatabase
+    public sealed class InMemoryDataBase : IDatabase
     {
+
+        Taxi[] IDatabase.Taxis { get { return _taxis; }}
+
+        private Taxi[] _taxis = new Taxi[] {
+            new Taxi { Taxi_driver_id = 1, Taxi_driver_name = "Predrag", Taxi_company = "Naxi", Location = 1 },
+            new Taxi { Taxi_driver_id = 2, Taxi_driver_name = "Nenad", Taxi_company = "Naxi", Location = 4 },
+            new Taxi { Taxi_driver_id = 3, Taxi_driver_name = "Dragan", Taxi_company = "Alfa", Location = 6 },
+            new Taxi { Taxi_driver_id = 4, Taxi_driver_name = "Goran", Taxi_company = "Gold", Location = 7 },
+        };
+
         private static List<Ride> Rides = new List<Ride>();
 
-        private InMemoryRideDataBase() { }
+        private InMemoryDataBase() { }
 
-        private static readonly Lazy<InMemoryRideDataBase> lazy = new Lazy<InMemoryRideDataBase>(() => new InMemoryRideDataBase(), isThreadSafe: true);
+        private static readonly Lazy<InMemoryDataBase> lazy = new Lazy<InMemoryDataBase>(() => new InMemoryDataBase(), isThreadSafe: true);
 
-        public static InMemoryRideDataBase Instance { get { return lazy.Value; } }
+        public static InMemoryDataBase Instance { get { return lazy.Value; } }
 
         public void SaveRide(Ride ride)
         {
