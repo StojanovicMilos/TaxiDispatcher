@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using TaxiDispatcher.Tests.HelperClasses;
+using Xunit;
 
 namespace TaxiDispatcher.Client.Tests.OverallFunctionalityTests
 {
-    [TestClass]
     public class OverallFunctionalityTests
     {
-        [TestMethod]
+        [Fact]
         public void OverallFunctionalityTest()
         {
             //arrange
@@ -22,7 +21,7 @@ namespace TaxiDispatcher.Client.Tests.OverallFunctionalityTests
             taxiDispatcherClient.Run();
 
             //assert
-            Assert.AreEqual(expectedMessages, logger.AllMessages);
+            Assert.Equal(expectedMessages, logger.AllMessages);
         }
     }
 }
