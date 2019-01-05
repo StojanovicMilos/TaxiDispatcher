@@ -20,7 +20,7 @@ namespace TaxiDispatcher.App
         public Ride OrderRide(RideOrder rideOrder)
         {
             Taxi closestTaxi = FindClosestTaxi(rideOrder.Start);
-            int ridePrice = CalculateRidePRice(rideOrder, closestTaxi);
+            int ridePrice = CalculateRidePrice(rideOrder, closestTaxi);
             Ride ride = CreateRide(rideOrder.Start, rideOrder.Destination, closestTaxi, ridePrice);
             Console.WriteLine("Ride ordered, price: " + ride.Price.ToString());
             return ride;
@@ -36,7 +36,7 @@ namespace TaxiDispatcher.App
             return closestTaxi;
         }
 
-        private static int CalculateRidePRice(RideOrder rideOrder, Taxi closestTaxi)
+        private static int CalculateRidePrice(RideOrder rideOrder, Taxi closestTaxi)
         {
             int ridePrice = closestTaxi.CalculateInitialRidePrice(rideOrder);
 
