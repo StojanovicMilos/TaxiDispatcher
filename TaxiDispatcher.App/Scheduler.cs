@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.App
 {
     public class Scheduler
     {
-
-
         private readonly IDatabase _database;
 
         public Scheduler() : this(InMemoryDataBase.Instance) { }
@@ -43,7 +42,7 @@ namespace TaxiDispatcher.App
             }
 
             if (min_distance > 15)
-                throw new Exception("There are no available taxi vehicles!");
+                throw new NoAvailableTaxiVehiclesException();
 
             #endregion
 

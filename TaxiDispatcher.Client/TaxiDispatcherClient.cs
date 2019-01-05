@@ -1,5 +1,6 @@
 ﻿using System;
 using TaxiDispatcher.App;
+using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.Client
@@ -39,15 +40,9 @@ namespace TaxiDispatcher.Client
                 {
                     OrderRide(rideOrder);
                 }
-                catch (Exception e)
+                catch (NoAvailableTaxiVehiclesException e)
                 {
-                    if (e.Message == "There are no available taxi vehicles!")
-                    {
-                        _logger.WriteLine(e.Message);
-                        _logger.WriteLine("");
-                    }
-                    else
-                        throw;
+                    _logger.WriteLine(e.Message + Environment.NewLine);
                 }
             }
         }

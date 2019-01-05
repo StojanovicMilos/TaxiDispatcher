@@ -1,5 +1,6 @@
 ﻿using System;
 using TaxiDispatcher.App;
+using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.Client.Tests.AppTests.SelectingClosestTaxi;
 using TaxiDispatcher.Client.Tests.HelperClasses;
 using Xunit;
@@ -37,7 +38,7 @@ namespace TaxiDispatcher.Client.Tests.AppTests.SelectingScosestTaxi
             Action action = () => scheduler.OrderRide(rideOrder.Start, rideOrder.Destination, rideOrder.RideType, rideOrder.RideDateTime);
 
             //Assert
-            var exception = Assert.Throws<Exception>(action);
+            var exception = Assert.Throws<NoAvailableTaxiVehiclesException>(action);
             Assert.Equal(expectedExceptionMessage, exception.Message);
         }
     }
