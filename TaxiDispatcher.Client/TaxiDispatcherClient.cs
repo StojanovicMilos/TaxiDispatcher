@@ -50,7 +50,7 @@ namespace TaxiDispatcher.Client
         private void OrderRide(RideOrder rideOrder)
         {
             _logger.WriteLine(string.Format("Ordering ride from {0} to {1}...", rideOrder.Start, rideOrder.Destination));
-            var ride = _scheduler.OrderRide(rideOrder.Start, rideOrder.Destination, rideOrder.RideType, rideOrder.RideDateTime);
+            var ride = _scheduler.OrderRide(rideOrder);
             _scheduler.AcceptRide(ride);
             _logger.WriteLine("");
         }

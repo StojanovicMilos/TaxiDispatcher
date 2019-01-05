@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaxiDispatcher.App.CustomExceptions;
+using TaxiDispatcher.Client;
 using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.App
@@ -16,11 +17,11 @@ namespace TaxiDispatcher.App
             _database = database;
         }
 
-        public Ride OrderRide(int start, int destination, int rideType, DateTime rideDateTime)
+        public Ride OrderRide(RideOrder rideOrder)
         {
-            Taxi closestTaxi = FindClosestTaxi(start);
-            int ridePrice = CalculateRidePRice(start, destination, rideType, rideDateTime, closestTaxi);
-            Ride ride = CreateRide(start, destination, closestTaxi, ridePrice);
+            Taxi closestTaxi = FindClosestTaxi(rideOrder.Start);
+            int ridePrice = CalculateRidePRice(rideOrder, closestTaxi);
+            Ride ride = CreateRide(rideOrder.Start, rideOrder.Destination, closestTaxi, ridePrice);
             Console.WriteLine("Ride ordered, price: " + ride.Price.ToString());
             return ride;
         }
@@ -53,24 +54,24 @@ namespace TaxiDispatcher.App
             return closestTaxi;
         }
 
-        private static int CalculateRidePRice(int start, int destination, int rideType, DateTime rideDateTime, Taxi closestTaxi)
+        private static int CalculateRidePRice(RideOrder rideOrder, Taxi closestTaxi)
         {
             int ridePrice;
             switch (closestTaxi.Taxi_company)
             {
                 case "Naxi":
                     {
-                        ridePrice = 10 * Math.Abs(start - destination);
+                        ridePrice = 10 * Math.Abs(rideOrder.Start - rideOrder.Destination);
                         break;
                     }
                 case "Alfa":
                     {
-                        ridePrice = 15 * Math.Abs(start - destination);
+                        ridePrice = 15 * Math.Abs(rideOrder.Start - rideOrder.Destination);
                         break;
                     }
                 case "Gold":
                     {
-                        ridePrice = 13 * Math.Abs(start - destination);
+                        ridePrice = 13 * Math.Abs(rideOrder.Start - rideOrder.Destination);
                         break;
                     }
                 default:
@@ -79,12 +80,12 @@ namespace TaxiDispatcher.App
                     }
             }
 
-            if (rideType == Constants.InterCity)
+            if (rideOrder.RideType == Constants.InterCity)
             {
                 ridePrice *= 2;
             }
 
-            if (rideDateTime.Hour < 6 || rideDateTime.Hour > 22)
+            if (rideOrder.RideDateTime.Hour < 6 || rideOrder.RideDateTime.Hour > 22)
             {
                 ridePrice *= 2;
             }

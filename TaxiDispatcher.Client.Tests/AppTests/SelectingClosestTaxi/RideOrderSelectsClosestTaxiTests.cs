@@ -19,7 +19,7 @@ namespace TaxiDispatcher.Client.Tests.AppTests.SelectingScosestTaxi
             Scheduler scheduler = new Scheduler(new TestDatabase());
 
             //Act
-            var ride = scheduler.OrderRide(rideOrder.Start, rideOrder.Destination, rideOrder.RideType, rideOrder.RideDateTime);
+            var ride = scheduler.OrderRide(rideOrder);
             scheduler.AcceptRide(ride);
 
             //Assert
@@ -35,7 +35,7 @@ namespace TaxiDispatcher.Client.Tests.AppTests.SelectingScosestTaxi
             Scheduler scheduler = new Scheduler(new TestDatabase());
 
             //Act
-            Action action = () => scheduler.OrderRide(rideOrder.Start, rideOrder.Destination, rideOrder.RideType, rideOrder.RideDateTime);
+            Action action = () => scheduler.OrderRide(rideOrder);
 
             //Assert
             var exception = Assert.Throws<NoAvailableTaxiVehiclesException>(action);
