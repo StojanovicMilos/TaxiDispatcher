@@ -8,5 +8,7 @@ namespace TaxiDispatcher.DAL
         public int Destination { get; set; }
         public int RideType { get; set; }
         public DateTime RideDateTime { get; set; }
+
+        public int Distance() => Math.Abs(Start - Destination);
     }
 }

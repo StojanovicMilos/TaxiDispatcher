@@ -9,10 +9,10 @@ namespace TaxiDispatcher.DAL
         Taxi[] IDatabase.Taxis { get { return _taxis; }}
 
         private Taxi[] _taxis = new Taxi[] {
-            new Taxi { Taxi_driver_id = 1, Taxi_driver_name = "Predrag", Taxi_company = "Naxi", Location = 1 },
-            new Taxi { Taxi_driver_id = 2, Taxi_driver_name = "Nenad", Taxi_company = "Naxi", Location = 4 },
-            new Taxi { Taxi_driver_id = 3, Taxi_driver_name = "Dragan", Taxi_company = "Alfa", Location = 6 },
-            new Taxi { Taxi_driver_id = 4, Taxi_driver_name = "Goran", Taxi_company = "Gold", Location = 7 },
+            new NaxiTaxi { Taxi_driver_id = 1, Taxi_driver_name = "Predrag", Location = 1 },
+            new NaxiTaxi { Taxi_driver_id = 2, Taxi_driver_name = "Nenad", Location = 4 },
+            new AlfaTaxi { Taxi_driver_id = 3, Taxi_driver_name = "Dragan", Location = 6 },
+            new GoldTaxi { Taxi_driver_id = 4, Taxi_driver_name = "Goran", Location = 7 },
         };
 
         private static List<Ride> Rides = new List<Ride>();
