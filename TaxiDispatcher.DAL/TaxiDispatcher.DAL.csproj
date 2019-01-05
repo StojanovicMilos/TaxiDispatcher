@@ -46,10 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ride.cs" />
     <Compile Include="RideOrder.cs" />
-    <Compile Include="TaxiDriver\AlfaTaxiDriver.cs" />
-    <Compile Include="TaxiDriver\GoldTaxiDriver.cs" />
-    <Compile Include="TaxiDriver\NaxiTaxiDriver.cs" />
-    <Compile Include="TaxiDriver\TaxiDriver.cs" />
+    <Compile Include="Taxi\AlfaTaxi.cs" />
+    <Compile Include="Taxi\GoldTaxi.cs" />
+    <Compile Include="Taxi\NaxiTaxi.cs" />
+    <Compile Include="Taxi\Taxi.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
