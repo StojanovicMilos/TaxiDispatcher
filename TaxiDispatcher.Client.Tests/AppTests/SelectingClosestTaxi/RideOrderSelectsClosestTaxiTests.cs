@@ -11,6 +11,7 @@ namespace TaxiDispatcher.Client.Tests.AppTests.SelectingScosestTaxi
         [Theory]
         [MemberData(nameof(RideOrderSelectsClosestTaxiTestData.SelectingClosestTaxiRideOrdersUsedInClientTestData), MemberType = typeof(RideOrderSelectsClosestTaxiTestData))]
         [MemberData(nameof(RideOrderSelectsClosestTaxiTestData.SelectingClosestTaxiTestData), MemberType = typeof(RideOrderSelectsClosestTaxiTestData))]
+        [MemberData(nameof(RideOrderSelectsClosestTaxiTestData.SelectingClosestTaxiTestDataEdgeCases), MemberType = typeof(RideOrderSelectsClosestTaxiTestData))]
         public void GivenRideOrderSchedulerSelectsDriver(RideOrder rideOrder, int expectedDriverId)
         {
             //Arrange
