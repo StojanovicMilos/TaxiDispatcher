@@ -45,6 +45,7 @@
     <Compile Include="InMemoryDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ride.cs" />
+    <Compile Include="RideOrder.cs" />
     <Compile Include="Taxi.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

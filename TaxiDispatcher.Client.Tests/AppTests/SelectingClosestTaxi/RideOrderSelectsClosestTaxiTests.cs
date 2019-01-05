@@ -3,6 +3,7 @@ using TaxiDispatcher.App;
 using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.Client.Tests.AppTests.SelectingClosestTaxi;
 using TaxiDispatcher.Client.Tests.HelperClasses;
+using TaxiDispatcher.DAL;
 using Xunit;
 
 namespace TaxiDispatcher.Client.Tests.AppTests.SelectingScosestTaxi

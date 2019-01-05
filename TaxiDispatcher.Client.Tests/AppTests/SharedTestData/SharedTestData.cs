@@ -1,5 +1,6 @@
 ﻿using System;
 using TaxiDispatcher.App;
+using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.Client.Tests.AppTests.SharedTestData
 {

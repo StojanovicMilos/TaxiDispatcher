@@ -13,5 +13,28 @@ namespace TaxiDispatcher.DAL
         {
             return Math.Abs(start - Location);
         }
+
+        public int CalculateInitialRidePrice(RideOrder rideOrder)
+        {
+            switch (Taxi_company)
+            {
+                case "Naxi":
+                    {
+                        return 10 * Math.Abs(rideOrder.Start - rideOrder.Destination);
+                    }
+                case "Alfa":
+                    {
+                        return 15 * Math.Abs(rideOrder.Start - rideOrder.Destination);
+                    }
+                case "Gold":
+                    {
+                        return 13 * Math.Abs(rideOrder.Start - rideOrder.Destination);
+                    }
+                default:
+                    {
+                        throw new Exception("Ilegal company");
+                    }
+            }
+        }
     }
 }

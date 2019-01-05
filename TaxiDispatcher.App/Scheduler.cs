@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.App.Extensions;
-using TaxiDispatcher.Client;
 using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.App
@@ -39,29 +38,7 @@ namespace TaxiDispatcher.App
 
         private static int CalculateRidePRice(RideOrder rideOrder, Taxi closestTaxi)
         {
-            int ridePrice;
-            switch (closestTaxi.Taxi_company)
-            {
-                case "Naxi":
-                    {
-                        ridePrice = 10 * Math.Abs(rideOrder.Start - rideOrder.Destination);
-                        break;
-                    }
-                case "Alfa":
-                    {
-                        ridePrice = 15 * Math.Abs(rideOrder.Start - rideOrder.Destination);
-                        break;
-                    }
-                case "Gold":
-                    {
-                        ridePrice = 13 * Math.Abs(rideOrder.Start - rideOrder.Destination);
-                        break;
-                    }
-                default:
-                    {
-                        throw new Exception("Ilegal company");
-                    }
-            }
+            int ridePrice = closestTaxi.CalculateInitialRidePrice(rideOrder);
 
             if (rideOrder.RideType == Constants.InterCity)
             {
