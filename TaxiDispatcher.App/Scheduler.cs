@@ -16,84 +16,92 @@ namespace TaxiDispatcher.App
             _database = database;
         }
 
-        public Ride OrderRide(int location_from, int location_to, int ride_type, DateTime time)
+        public Ride OrderRide(int start, int destination, int rideType, DateTime rideDateTime)
         {
-            #region FindingTheBestVehicle 
+            Taxi closestTaxi = FindClosestTaxi(start);
+            int ridePrice = CalculateRidePRice(start, destination, rideType, rideDateTime, closestTaxi);
+            Ride ride = CreateRide(start, destination, closestTaxi, ridePrice);
+            Console.WriteLine("Ride ordered, price: " + ride.Price.ToString());
+            return ride;
+        }
 
-            Taxi min_taxi = _database.Taxis[0];
-            int min_distance = Math.Abs(_database.Taxis[0].Location - location_from);
+        private Taxi FindClosestTaxi(int start)
+        {
+            Taxi closestTaxi = _database.Taxis[0];
+            int min_distance = Math.Abs(_database.Taxis[0].Location - start);
 
-            if (Math.Abs(_database.Taxis[1].Location - location_from) < min_distance)
+            if (Math.Abs(_database.Taxis[1].Location - start) < min_distance)
             {
-                min_taxi = _database.Taxis[1];
-                min_distance = Math.Abs(_database.Taxis[1].Location - location_from);
+                closestTaxi = _database.Taxis[1];
+                min_distance = Math.Abs(_database.Taxis[1].Location - start);
             }
 
-            if (Math.Abs(_database.Taxis[2].Location - location_from) < min_distance)
+            if (Math.Abs(_database.Taxis[2].Location - start) < min_distance)
             {
-                min_taxi = _database.Taxis[2];
-                min_distance = Math.Abs(_database.Taxis[2].Location - location_from);
+                closestTaxi = _database.Taxis[2];
+                min_distance = Math.Abs(_database.Taxis[2].Location - start);
             }
 
-            if (Math.Abs(_database.Taxis[3].Location - location_from) < min_distance)
+            if (Math.Abs(_database.Taxis[3].Location - start) < min_distance)
             {
-                min_taxi = _database.Taxis[3];
-                min_distance = Math.Abs(_database.Taxis[3].Location - location_from);
+                closestTaxi = _database.Taxis[3];
+                min_distance = Math.Abs(_database.Taxis[3].Location - start);
             }
 
             if (min_distance > 15)
                 throw new NoAvailableTaxiVehiclesException();
+            return closestTaxi;
+        }
 
-            #endregion
-
-            #region CreatingRide
-
-            Ride ride = new Ride();
-            ride.Taxi_driver_id = min_taxi.Taxi_driver_id;
-            ride.Location_from = location_from;
-            ride.Location_to = location_to;
-            ride.Taxi_driver_name = min_taxi.Taxi_driver_name;
-
-            #endregion
-
-            #region CalculatingPrice
-
-            switch (min_taxi.Taxi_company)
+        private static int CalculateRidePRice(int start, int destination, int rideType, DateTime rideDateTime, Taxi closestTaxi)
+        {
+            int ridePrice;
+            switch (closestTaxi.Taxi_company)
             {
                 case "Naxi":
-                {
-                    ride.Price = 10 * Math.Abs(location_from - location_to);
-                    break;
-                }
+                    {
+                        ridePrice = 10 * Math.Abs(start - destination);
+                        break;
+                    }
                 case "Alfa":
-                {
-                    ride.Price = 15 * Math.Abs(location_from - location_to);
-                    break;
-                }
+                    {
+                        ridePrice = 15 * Math.Abs(start - destination);
+                        break;
+                    }
                 case "Gold":
-                {
-                    ride.Price = 13 * Math.Abs(location_from - location_to);
-                    break;
-                }
+                    {
+                        ridePrice = 13 * Math.Abs(start - destination);
+                        break;
+                    }
                 default:
-                {
-                    throw new Exception("Ilegal company");
-                }
+                    {
+                        throw new Exception("Ilegal company");
+                    }
             }
 
-            if (ride_type == Constants.InterCity)
+            if (rideType == Constants.InterCity)
             {
-                ride.Price *= 2;
+                ridePrice *= 2;
             }
 
-            if (time.Hour < 6 || time.Hour > 22)
+            if (rideDateTime.Hour < 6 || rideDateTime.Hour > 22)
             {
-                ride.Price *= 2;
+                ridePrice *= 2;
             }
 
-            #endregion
+            return ridePrice;
+        }
 
-            Console.WriteLine("Ride ordered, price: " + ride.Price.ToString());
+        private static Ride CreateRide(int start, int destination, Taxi closestTaxi, int ridePrice)
+        {
+            Ride ride = new Ride
+            {
+                Taxi_driver_id = closestTaxi.Taxi_driver_id,
+                Location_from = start,
+                Location_to = destination,
+                Taxi_driver_name = closestTaxi.Taxi_driver_name,
+                Price = ridePrice
+            };
             return ride;
         }
 
