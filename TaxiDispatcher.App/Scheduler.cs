@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaxiDispatcher.App.CustomExceptions;
+using TaxiDispatcher.App.Extensions;
 using TaxiDispatcher.Client;
 using TaxiDispatcher.DAL;
 
@@ -26,30 +27,12 @@ namespace TaxiDispatcher.App
             return ride;
         }
 
+        private const int MAXIMUMORDERDISTANCE = 15;
+
         private Taxi FindClosestTaxi(int start)
         {
-            Taxi closestTaxi = _database.Taxis[0];
-            int min_distance = Math.Abs(_database.Taxis[0].Location - start);
-
-            if (Math.Abs(_database.Taxis[1].Location - start) < min_distance)
-            {
-                closestTaxi = _database.Taxis[1];
-                min_distance = Math.Abs(_database.Taxis[1].Location - start);
-            }
-
-            if (Math.Abs(_database.Taxis[2].Location - start) < min_distance)
-            {
-                closestTaxi = _database.Taxis[2];
-                min_distance = Math.Abs(_database.Taxis[2].Location - start);
-            }
-
-            if (Math.Abs(_database.Taxis[3].Location - start) < min_distance)
-            {
-                closestTaxi = _database.Taxis[3];
-                min_distance = Math.Abs(_database.Taxis[3].Location - start);
-            }
-
-            if (min_distance > 15)
+            Taxi closestTaxi = _database.Taxis.WithMinimum(t => t.DistanceTo(start));
+            if (closestTaxi.DistanceTo(start) > MAXIMUMORDERDISTANCE)
                 throw new NoAvailableTaxiVehiclesException();
             return closestTaxi;
         }
