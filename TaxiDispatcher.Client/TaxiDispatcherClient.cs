@@ -11,10 +11,10 @@ namespace TaxiDispatcher.Client
         private readonly Scheduler _scheduler = new Scheduler();
         private readonly RideOrder[] _rideOrders = new RideOrder[]
             {
-                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)},
-                new RideOrder {StartLocation = new Location { CoordinateX= 0 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 9, 0, 0)},
-                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)},
-                new RideOrder {StartLocation = new Location { CoordinateX= 35 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)}
+                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)},
+                new RideOrder {StartLocation = new Location { CoordinateX= 0 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 9, 0, 0)},
+                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)},
+                new RideOrder {StartLocation = new Location { CoordinateX= 35 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)}
             };
 
         public TaxiDispatcherClient() : this(new Logger()) { }

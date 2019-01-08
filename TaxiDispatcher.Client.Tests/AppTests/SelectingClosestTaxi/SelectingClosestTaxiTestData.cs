@@ -33,17 +33,17 @@ namespace TaxiDispatcher.Client.Tests.AppTests.SelectingClosestTaxi
         public static IEnumerable<object[]> SelectingClosestTaxiTestDataEdgeCases =>
             new List<object[]>
             {
-                new object[] {new RideOrder {StartLocation = Location(-11), DestinationLocation = Location(0), RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)}, DriverId(1)},
-                new object[] {new RideOrder {StartLocation = Location(19), DestinationLocation = Location(0), RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)}, DriverId(4)},
+                new object[] {new RideOrder {StartLocation = Location(-11), DestinationLocation = Location(0), RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)}, DriverId(1)},
+                new object[] {new RideOrder {StartLocation = Location(19), DestinationLocation = Location(0), RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)}, DriverId(4)},
             };
 
         public static IEnumerable<object[]> TooFarRideOrdersTestData =>
             new List<object[]>
             {
-                new object[] {new RideOrder {StartLocation = Location(-15), DestinationLocation = Location(0), RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} },
-                new object[] {new RideOrder {StartLocation = Location(23), DestinationLocation = Location(0), RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} },
-                new object[] {new RideOrder {StartLocation = Location(int.MaxValue), DestinationLocation = Location(0), RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} },
-                new object[] {new RideOrder {StartLocation = Location(int.MinValue), DestinationLocation = Location(0), RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} }
+                new object[] {new RideOrder {StartLocation = Location(-15), DestinationLocation = Location(0), RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} },
+                new object[] {new RideOrder {StartLocation = Location(23), DestinationLocation = Location(0), RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} },
+                new object[] {new RideOrder {StartLocation = Location(int.MaxValue), DestinationLocation = Location(0), RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} },
+                new object[] {new RideOrder {StartLocation = Location(int.MinValue), DestinationLocation = Location(0), RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)} }
             };
     }
 }
