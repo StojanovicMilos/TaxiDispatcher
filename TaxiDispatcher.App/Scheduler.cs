@@ -38,28 +38,11 @@ namespace TaxiDispatcher.App
         public void AcceptRide(Ride ride)
         {
             _database.SaveRide(ride);
+            Taxi rideTaxi = ride.RideTaxi;
+            rideTaxi.Location = ride.Location_to;
 
-            if (_database.Taxis[0].Taxi_driver_id == ride.Taxi_driver_id)
-            {
-                _database.Taxis[0].Location = ride.Location_to;
-            }
 
-            if (_database.Taxis[1].Taxi_driver_id == ride.Taxi_driver_id)
-            {
-                _database.Taxis[1].Location = ride.Location_to;
-            }
-
-            if (_database.Taxis[2].Taxi_driver_id == ride.Taxi_driver_id)
-            {
-                _database.Taxis[2].Location = ride.Location_to;
-            }
-
-            if (_database.Taxis[3].Taxi_driver_id == ride.Taxi_driver_id)
-            {
-                _database.Taxis[3].Location = ride.Location_to;
-            }
-
-            Console.WriteLine("Ride accepted, waiting for driver: " + ride.Taxi_driver_name);
+            Console.WriteLine("Ride accepted, waiting for driver: " + rideTaxi.Taxi_driver_name);
         }
 
         public List<Ride> GetRideList(int driver_id)
@@ -69,7 +52,7 @@ namespace TaxiDispatcher.App
             foreach (int id in ids)
             {
                 Ride ride = _database.GetRide(id);
-                if (ride.Taxi_driver_id == driver_id)
+                if (ride.RideTaxi.Taxi_driver_id == driver_id)
                     rides.Add(ride);
             }
 
