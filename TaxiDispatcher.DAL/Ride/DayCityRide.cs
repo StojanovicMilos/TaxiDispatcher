@@ -4,6 +4,6 @@
     {
         protected override int RideCostMultiplier => 1;
 
-        public DayCityRide(RideOrder rideOrder, Taxi taxi, int initialRidePrice) : base(rideOrder, taxi, initialRidePrice) { }
+        public DayCityRide(RideOrder rideOrder, Taxi taxi) : base(rideOrder, taxi) { }
     }
 }

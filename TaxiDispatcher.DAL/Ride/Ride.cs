@@ -11,13 +11,13 @@
 
         protected abstract int RideCostMultiplier { get; }
 
-        protected Ride(RideOrder rideOrder, Taxi taxi, int initialRidePrice)
+        protected Ride(RideOrder rideOrder, Taxi taxi)
         {
             Taxi_driver_id = taxi.Taxi_driver_id;
             Location_from = rideOrder.Start;
             Location_to = rideOrder.Destination;
             Taxi_driver_name = taxi.Taxi_driver_name;
-            Price = initialRidePrice * RideCostMultiplier;
+            Price = taxi.CalculateInitialRidePrice(rideOrder) * RideCostMultiplier;
         }
     }
 }
