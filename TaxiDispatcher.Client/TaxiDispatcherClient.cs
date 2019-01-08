@@ -11,10 +11,10 @@ namespace TaxiDispatcher.Client
         private readonly Scheduler _scheduler = new Scheduler();
         private readonly RideOrder[] _rideOrders = new RideOrder[]
             {
-                new RideOrder {Start = 5, Destination = 0, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)},
-                new RideOrder {Start = 0, Destination = 12, RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 9, 0, 0)},
-                new RideOrder {Start = 5, Destination = 0, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)},
-                new RideOrder {Start = 35, Destination = 12, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)}
+                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)},
+                new RideOrder {StartLocation = new Location { CoordinateX= 0 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = Constants.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 9, 0, 0)},
+                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)},
+                new RideOrder {StartLocation = new Location { CoordinateX= 35 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = Constants.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)}
             };
 
         public TaxiDispatcherClient() : this(new Logger()) { }
@@ -49,7 +49,7 @@ namespace TaxiDispatcher.Client
 
         private void OrderRide(RideOrder rideOrder)
         {
-            _logger.WriteLine(string.Format("Ordering ride from {0} to {1}...", rideOrder.Start, rideOrder.Destination));
+            _logger.WriteLine(string.Format("Ordering ride from {0} to {1}...", rideOrder.StartLocation, rideOrder.DestinationLocation));
             var ride = _scheduler.OrderRide(rideOrder);
             _scheduler.AcceptRide(ride);
             _logger.WriteLine("");

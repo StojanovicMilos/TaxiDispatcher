@@ -52,6 +52,7 @@
     <Compile Include="RideOrder.cs" />
     <Compile Include="Taxi\AlfaTaxi.cs" />
     <Compile Include="Taxi\GoldTaxi.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Taxi\NaxiTaxi.cs" />
     <Compile Include="Taxi\Taxi.cs" />
   </ItemGroup>
