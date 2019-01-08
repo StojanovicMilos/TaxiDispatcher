@@ -9,7 +9,7 @@
         public string Taxi_driver_name { get; set; }
         public int Price { get; set; }
 
-        protected abstract int RideCostMultiplier { get; }
+        protected abstract int RidePriceMultiplier { get; }
 
         protected Ride(RideOrder rideOrder, Taxi taxi)
         {
@@ -17,7 +17,7 @@
             Location_from = rideOrder.Start;
             Location_to = rideOrder.Destination;
             Taxi_driver_name = taxi.Taxi_driver_name;
-            Price = taxi.CalculateInitialRidePrice(rideOrder) * RideCostMultiplier;
+            Price = taxi.CalculateInitialRidePrice(rideOrder) * RidePriceMultiplier;
         }
     }
 }

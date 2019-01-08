@@ -2,7 +2,7 @@
 {
     public class NightInterCityRide : Ride
     {
-        protected override int RideCostMultiplier => 4;
+        protected override int RidePriceMultiplier => 4;
 
         public NightInterCityRide(RideOrder rideOrder, Taxi taxi) : base(rideOrder, taxi) { }
     }
