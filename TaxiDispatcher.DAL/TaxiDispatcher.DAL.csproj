@@ -44,7 +44,11 @@
     <Compile Include="IDatabase.cs" />
     <Compile Include="InMemoryDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ride.cs" />
+    <Compile Include="Ride\DayCityRide.cs" />
+    <Compile Include="Ride\DayInterCityRide.cs" />
+    <Compile Include="Ride\NightCityRide.cs" />
+    <Compile Include="Ride\NightInterCityRide.cs" />
+    <Compile Include="Ride\Ride.cs" />
     <Compile Include="RideOrder.cs" />
     <Compile Include="Taxi\AlfaTaxi.cs" />
     <Compile Include="Taxi\GoldTaxi.cs" />

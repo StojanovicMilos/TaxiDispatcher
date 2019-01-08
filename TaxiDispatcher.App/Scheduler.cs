@@ -20,8 +20,7 @@ namespace TaxiDispatcher.App
         public Ride OrderRide(RideOrder rideOrder)
         {
             Taxi closestTaxi = FindClosestTaxi(rideOrder.Start);
-            int ridePrice = CalculateRidePrice(rideOrder, closestTaxi);
-            Ride ride = CreateRide(rideOrder.Start, rideOrder.Destination, closestTaxi, ridePrice);
+            Ride ride = RideFactory.CreateRide(rideOrder, closestTaxi);
             Console.WriteLine("Ride ordered, price: " + ride.Price.ToString());
             return ride;
         }
@@ -34,36 +33,6 @@ namespace TaxiDispatcher.App
             if (closestTaxi.DistanceTo(start) > MAXIMUMORDERDISTANCE)
                 throw new NoAvailableTaxiVehiclesException();
             return closestTaxi;
-        }
-
-        private static int CalculateRidePrice(RideOrder rideOrder, Taxi closestTaxi)
-        {
-            int ridePrice = closestTaxi.CalculateInitialRidePrice(rideOrder);
-
-            if (rideOrder.RideType == Constants.InterCity)
-            {
-                ridePrice *= 2;
-            }
-
-            if (rideOrder.RideDateTime.Hour < 6 || rideOrder.RideDateTime.Hour > 22)
-            {
-                ridePrice *= 2;
-            }
-
-            return ridePrice;
-        }
-
-        private static Ride CreateRide(int start, int destination, Taxi closestTaxi, int ridePrice)
-        {
-            Ride ride = new Ride
-            {
-                Taxi_driver_id = closestTaxi.Taxi_driver_id,
-                Location_from = start,
-                Location_to = destination,
-                Taxi_driver_name = closestTaxi.Taxi_driver_name,
-                Price = ridePrice
-            };
-            return ride;
         }
 
         public void AcceptRide(Ride ride)
