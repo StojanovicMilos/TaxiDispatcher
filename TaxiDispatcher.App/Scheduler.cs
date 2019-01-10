@@ -39,7 +39,8 @@ namespace TaxiDispatcher.App
         {
             _database.SaveRide(ride);
             Taxi rideTaxi = ride.RideTaxi;
-            rideTaxi.CurrentLocation = ride.DestinationLocation;
+            rideTaxi.AcceptRide(ride);
+            rideTaxi.PerformRide(ride);
             Console.WriteLine("Ride accepted, waiting for driver: " + rideTaxi.Taxi_driver_name);
         }
 
