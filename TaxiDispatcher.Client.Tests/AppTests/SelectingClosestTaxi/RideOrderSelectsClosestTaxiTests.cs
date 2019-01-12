@@ -24,7 +24,7 @@ namespace TaxiDispatcher.Client.Tests.AppTests.SelectingScosestTaxi
             scheduler.AcceptRide(ride);
 
             //Assert
-            Assert.Equal(expectedDriverId, ride.RideTaxi.Taxi_driver_id);
+            Assert.Equal(expectedDriverId, ride.RideTaxi.TaxiDriverId);
         }
 
         [Theory]

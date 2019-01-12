@@ -15,10 +15,10 @@ namespace TaxiDispatcher.Client.Tests.HelperClasses
         }
 
         public Taxi[] Taxis { get; } = new Taxi[] {
-            new NaxiTaxi { Taxi_driver_id = 1, Taxi_driver_name = "Predrag", CurrentLocation = new Location{CoordinateX = 1 } },
-            new NaxiTaxi { Taxi_driver_id = 2, Taxi_driver_name = "Nenad", CurrentLocation = new Location{CoordinateX = 4 } },
-            new AlfaTaxi { Taxi_driver_id = 3, Taxi_driver_name = "Dragan", CurrentLocation = new Location{CoordinateX = 6 } },
-            new GoldTaxi { Taxi_driver_id = 4, Taxi_driver_name = "Goran", CurrentLocation = new Location{CoordinateX = 7 } },
+            new NaxiTaxi { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new Location{CoordinateX = 1 } },
+            new NaxiTaxi { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new Location{CoordinateX = 4 } },
+            new AlfaTaxi { TaxiDriverId = 3, TaxiDriverName = "Dragan", CurrentLocation = new Location{CoordinateX = 6 } },
+            new GoldTaxi { TaxiDriverId = 4, TaxiDriverName = "Goran", CurrentLocation = new Location{CoordinateX = 7 } },
         };
 
         private const int StartingId = 1;
@@ -32,6 +32,6 @@ namespace TaxiDispatcher.Client.Tests.HelperClasses
             return Rides.Where(r => r.Ride_id == id).First();
         }
 
-        public Taxi GetTaxi(int id) => Taxis.First(t => t.Taxi_driver_id == id);
+        public Taxi GetTaxi(int id) => Taxis.First(t => t.TaxiDriverId == id);
     }
 }

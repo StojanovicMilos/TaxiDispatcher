@@ -40,7 +40,7 @@ namespace TaxiDispatcher.App
             Taxi rideTaxi = ride.RideTaxi;
             rideTaxi.AcceptRide(ride);
             rideTaxi.PerformRide(ride);
-            Console.WriteLine("Ride accepted, waiting for driver: " + rideTaxi.Taxi_driver_name);
+            Console.WriteLine("Ride accepted, waiting for driver: " + rideTaxi.TaxiDriverName);
         }
     }
 }
