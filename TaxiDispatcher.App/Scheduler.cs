@@ -26,7 +26,8 @@ namespace TaxiDispatcher.App
 
         private Taxi FindClosestTaxi(Location startLocation)
         {
-            Taxi closestTaxi = _database.Taxis.WithMinimum(t => t.DistanceTo(startLocation));
+            var allTaxis = _database.GetAllTaxis();
+            Taxi closestTaxi = allTaxis.WithMinimum(t => t.DistanceTo(startLocation));
             if (closestTaxi.DistanceTo(startLocation) > MAXIMUMORDERDISTANCE)
                 throw new NoAvailableTaxiVehiclesException();
             return closestTaxi;

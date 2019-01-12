@@ -6,9 +6,6 @@ namespace TaxiDispatcher.DAL
 {
     public sealed class InMemoryDataBase : IDatabase
     {
-
-        Taxi[] IDatabase.Taxis { get { return _taxis; }}
-
         private Taxi[] _taxis = new Taxi[] {
             new NaxiTaxi { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new Location { CoordinateX = 1 } },
             new NaxiTaxi { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new Location { CoordinateX = 4 } },
@@ -51,6 +48,8 @@ namespace TaxiDispatcher.DAL
 
             return ride;
         }
+
+        public Taxi[] GetAllTaxis() => _taxis;
 
         public Taxi GetTaxi(int id) =>_taxis.First(t => t.TaxiDriverId == id);
     }
