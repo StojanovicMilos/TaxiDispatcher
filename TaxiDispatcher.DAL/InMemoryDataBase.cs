@@ -6,14 +6,14 @@ namespace TaxiDispatcher.DAL
 {
     public sealed class InMemoryDataBase : IDatabase
     {
-        private Taxi[] _taxis = new Taxi[] {
-            new NaxiTaxi { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new Location { CoordinateX = 1 } },
-            new NaxiTaxi { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new Location { CoordinateX = 4 } },
-            new AlfaTaxi { TaxiDriverId = 3, TaxiDriverName = "Dragan", CurrentLocation = new Location { CoordinateX = 6 } },
-            new GoldTaxi { TaxiDriverId = 4, TaxiDriverName = "Goran", CurrentLocation = new Location { CoordinateX = 7 } },
+        private List<DBTaxi> _taxis = new List<DBTaxi> {
+            new DBTaxi { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new DBLocation { CoordinateX = 1 }, TaxiCompany = "Naxi" },
+            new DBTaxi { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new DBLocation { CoordinateX = 4 }, TaxiCompany = "Naxi"},
+            new DBTaxi { TaxiDriverId = 3, TaxiDriverName = "Dragan", CurrentLocation = new DBLocation { CoordinateX = 6 }, TaxiCompany = "Alfa"},
+            new DBTaxi { TaxiDriverId = 4, TaxiDriverName = "Goran", CurrentLocation = new DBLocation { CoordinateX = 7 }, TaxiCompany = "Gold"},
         };
 
-        private static List<Ride> Rides = new List<Ride>();
+        private static List<DBRide> Rides = new List<DBRide>();
 
         private InMemoryDataBase() { }
 
@@ -21,36 +21,49 @@ namespace TaxiDispatcher.DAL
 
         public static InMemoryDataBase Instance { get { return lazy.Value; } }
 
-        public void SaveRide(Ride ride)
+        public void SaveRide(DBRide ride)
         {
-            int max_id = Rides.Count == 0 ? 0 : Rides[0].Ride_id;
-            foreach (Ride r in Rides)
+            int max_id = Rides.Count == 0 ? 0 : Rides[0].RideId;
+            foreach (DBRide r in Rides)
             {
-                if (r.Ride_id > max_id)
-                    max_id = r.Ride_id;
+                if (r.RideId > max_id)
+                    max_id = r.RideId;
             }
 
-            ride.Ride_id = max_id + 1;
+            ride.RideId = max_id + 1;
             Rides.Add(ride);
         }
 
-        public Ride GetRide(int id)
+        public DBRide GetRide(int id)
         {
-            Ride ride = Rides[0];
-            bool found = ride.Ride_id == id;
+            DBRide ride = Rides[0];
+            bool found = ride.RideId == id;
             int current = 1;
             while (!found)
             {
                 ride = Rides[current];
-                found = ride.Ride_id == id;
+                found = ride.RideId == id;
                 current += 1;
             }
 
             return ride;
         }
 
-        public Taxi[] GetAllTaxis() => _taxis;
+        public List<DBTaxi> GetAllTaxis() => _taxis;
 
-        public Taxi GetTaxi(int id) =>_taxis.First(t => t.TaxiDriverId == id);
+        public DBTaxi GetTaxi(int id) =>_taxis.First(t => t.TaxiDriverId == id);
+
+        public void SaveExistingTaxi(DBTaxi dbTaxi)
+        {
+            var taxiInDb = GetTaxi(dbTaxi.TaxiDriverId);
+            taxiInDb.TaxiDriverName = dbTaxi.TaxiDriverName;
+            taxiInDb.CurrentLocation = dbTaxi.CurrentLocation;
+            taxiInDb.TaxiCompany = dbTaxi.TaxiCompany;
+            taxiInDb.DBRides = new List<DBRide>();
+            foreach (var dbRide in dbTaxi.DBRides)
+            {
+                taxiInDb.DBRides.Add(dbRide);
+            }
+        }
     }
 }

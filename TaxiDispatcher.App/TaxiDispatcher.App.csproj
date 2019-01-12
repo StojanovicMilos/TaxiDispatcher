@@ -41,12 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomExceptions\InvalidTaxiCompanyException.cs" />
     <Compile Include="CustomExceptions\NoAvailableTaxiVehiclesException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RideFactory.cs" />
+    <Compile Include="Ride\RideFactory.cs" />
+    <Compile Include="RideOrder.cs" />
+    <Compile Include="Ride\DayCityRide.cs" />
+    <Compile Include="Ride\DayInterCityRide.cs" />
+    <Compile Include="Ride\NightCityRide.cs" />
+    <Compile Include="Ride\NightInterCityRide.cs" />
+    <Compile Include="Ride\Ride.cs" />
     <Compile Include="Scheduler.cs" />
-    <Compile Include="TaxiContext.cs" />
+    <Compile Include="Taxi\TaxiContext.cs" />
+    <Compile Include="Taxi\AlfaTaxi.cs" />
+    <Compile Include="Taxi\GoldTaxi.cs" />
+    <Compile Include="Taxi\NaxiTaxi.cs" />
+    <Compile Include="Taxi\Taxi.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaxiDispatcher.DAL\TaxiDispatcher.DAL.csproj">

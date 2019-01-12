@@ -9,20 +9,28 @@ namespace TaxiDispatcher.Client
     public class TaxiDispatcherClient
     {
         private readonly ILogger _logger;
-        private readonly Scheduler _scheduler = new Scheduler();
+        private readonly TaxiContext _taxiContext;
+        private readonly Scheduler _scheduler;
         private readonly RideOrder[] _rideOrders = new RideOrder[]
             {
-                new RideOrder { StartLocation = new Location { CoordinateX = 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 23, 0, 0) },
-                new RideOrder { StartLocation = new Location { CoordinateX = 0 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.InterCity, RideDateTime = new DateTime(2018, 1, 1, 9, 0, 0) },
-                new RideOrder { StartLocation = new Location { CoordinateX = 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) },
-                new RideOrder { StartLocation = new Location { CoordinateX = 35 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) }
+                new RideOrder { StartLocation = new Location(5), DestinationLocation = new Location(0), RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 23, 0, 0) },
+                new RideOrder { StartLocation = new Location(0), DestinationLocation = new Location(12), RideType = RideType.InterCity, RideDateTime = new DateTime(2018, 1, 1, 9, 0, 0) },
+                new RideOrder { StartLocation = new Location(5), DestinationLocation = new Location(0), RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) },
+                new RideOrder { StartLocation = new Location(35), DestinationLocation = new Location(12), RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) }
             };
 
-        public TaxiDispatcherClient() : this(new Logger()) { }
+        public TaxiDispatcherClient()
+        {
+            _logger = new Logger();
+            _taxiContext = new TaxiContext();
+            _scheduler = new Scheduler();
+        }
 
-        public TaxiDispatcherClient(ILogger logger)
+        public TaxiDispatcherClient(ILogger logger, IDatabase database)
         {
             _logger = logger;
+            _taxiContext = new TaxiContext(database);
+            _scheduler = new Scheduler(database);
         }
 
         public void Run()
@@ -56,7 +64,7 @@ namespace TaxiDispatcher.Client
             Console.WriteLine("Ride accepted, waiting for driver: " + ride.RideTaxi.TaxiDriverName + Environment.NewLine);
         }
 
-        private TaxiDTO GetTaxiWithEarningsById(int id) => new TaxiContext().GetTaxiWithEarningsById(id);
+        private TaxiDTO GetTaxiWithEarningsById(int id) => _taxiContext.GetTaxiWithEarningsById(id);
 
         private void LogTaxiWithEarnings(TaxiDTO taxiWithEarnings)
         {

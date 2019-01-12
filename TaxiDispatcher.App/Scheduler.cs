@@ -8,12 +8,14 @@ namespace TaxiDispatcher.App
     public class Scheduler
     {
         private readonly IDatabase _database;
+        private readonly TaxiContext _taxiContext;
 
         public Scheduler() : this(InMemoryDataBase.Instance) { }
 
         public Scheduler(IDatabase database)
         {
             _database = database;
+            _taxiContext = new TaxiContext(database);
         }
 
         public Ride OrderRide(RideOrder rideOrder)
@@ -26,7 +28,7 @@ namespace TaxiDispatcher.App
 
         private Taxi FindClosestTaxi(Location startLocation)
         {
-            var allTaxis = _database.GetAllTaxis();
+            var allTaxis = _taxiContext.GetAllTaxis();
             Taxi closestTaxi = allTaxis.WithMinimum(t => t.DistanceTo(startLocation));
             if (closestTaxi.DistanceTo(startLocation) > MAXIMUMORDERDISTANCE)
                 throw new NoAvailableTaxiVehiclesException();
@@ -35,10 +37,11 @@ namespace TaxiDispatcher.App
 
         public void AcceptRide(Ride ride)
         {
-            _database.SaveRide(ride);
             Taxi rideTaxi = ride.RideTaxi;
             rideTaxi.AcceptRide(ride);
-            rideTaxi.PerformRide(ride);
+            var dbTaxi = rideTaxi.ToDBTaxi();
+            _database.SaveExistingTaxi(dbTaxi);
+            _database.SaveRide(ride.ToDBRide(dbTaxi));
         }
     }
 }
