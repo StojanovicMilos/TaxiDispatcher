@@ -1,7 +1,8 @@
 ﻿using System;
+using TaxiDispatcher.App.Taxis;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.App.Rides
 {
     public class NightCityRide : Ride
     {
@@ -9,9 +10,9 @@ namespace TaxiDispatcher.App
 
         public NightCityRide(Location startLocation, Location destinationLocation, DateTime rideDateTime, Taxi taxi) : base(startLocation, destinationLocation, rideDateTime, taxi) { }
 
-        public override DBRide ToDBRide(DBTaxi dbTaxi)
+        public override DbRide ToDbRide(DbTaxi dbTaxi)
         {
-            DBRide dbRide = ToDBRideBase(dbTaxi);
+            DbRide dbRide = ToDbRideBase(dbTaxi);
             dbRide.RideType = (int)RideType.City;
             return dbRide;
         }

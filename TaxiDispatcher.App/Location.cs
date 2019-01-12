@@ -12,7 +12,7 @@ namespace TaxiDispatcher.App
             _coordinateX = coordinateX;
         }
 
-        public Location(DBLocation dbLocation)
+        public Location(DbLocation dbLocation)
         {
             _coordinateX = dbLocation.CoordinateX;
         }
@@ -27,9 +27,9 @@ namespace TaxiDispatcher.App
             return _coordinateX.ToString();
         }
 
-        public DBLocation ToDBLocation()
+        public DbLocation ToDbLocation()
         {
-            return new DBLocation { CoordinateX = _coordinateX };
+            return new DbLocation { CoordinateX = _coordinateX };
         }
     }
 }

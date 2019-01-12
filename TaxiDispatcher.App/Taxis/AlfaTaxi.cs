@@ -1,16 +1,16 @@
 ﻿using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.App.Taxis
 {
     public class AlfaTaxi : Taxi
     {
-        public AlfaTaxi(DBTaxi dbTaxi) : base(dbTaxi) { }
+        public AlfaTaxi(DbTaxi dbTaxi) : base(dbTaxi) { }
 
         protected override int PricePerDistance => 15;
 
-        public override DBTaxi ToDBTaxi()
+        public override DbTaxi ToDbTaxi()
         {
-            DBTaxi dbTaxi = ToDBTaxiBase();
+            DbTaxi dbTaxi = ToDbTaxiBase();
             dbTaxi.TaxiCompany = "Alfa";
             return dbTaxi;
         }

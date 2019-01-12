@@ -2,11 +2,10 @@
 using TaxiDispatcher.App;
 using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.Client.Tests.AppTests.SelectingClosestTaxi;
-using TaxiDispatcher.Client.Tests.HelperClasses;
-using TaxiDispatcher.DAL;
+using TaxiDispatcher.Tests.HelperClasses;
 using Xunit;
 
-namespace TaxiDispatcher.Client.Tests.AppTests.SelectingScosestTaxi
+namespace TaxiDispatcher.Tests.AppTests.SelectingClosestTaxi
 {
     public class RideOrderSelectsClosestTaxiTests
     {

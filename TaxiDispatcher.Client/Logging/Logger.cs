@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaxiDispatcher.Client
+namespace TaxiDispatcher.Client.Logging
 {
     public class Logger : ILogger
     {

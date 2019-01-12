@@ -46,19 +46,19 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ride\RideFactory.cs" />
+    <Compile Include="Rides\RideFactory.cs" />
     <Compile Include="RideOrder.cs" />
-    <Compile Include="Ride\DayCityRide.cs" />
-    <Compile Include="Ride\DayInterCityRide.cs" />
-    <Compile Include="Ride\NightCityRide.cs" />
-    <Compile Include="Ride\NightInterCityRide.cs" />
-    <Compile Include="Ride\Ride.cs" />
+    <Compile Include="Rides\DayCityRide.cs" />
+    <Compile Include="Rides\DayInterCityRide.cs" />
+    <Compile Include="Rides\NightCityRide.cs" />
+    <Compile Include="Rides\NightInterCityRide.cs" />
+    <Compile Include="Rides\Ride.cs" />
     <Compile Include="Scheduler.cs" />
-    <Compile Include="Taxi\TaxiContext.cs" />
-    <Compile Include="Taxi\AlfaTaxi.cs" />
-    <Compile Include="Taxi\GoldTaxi.cs" />
-    <Compile Include="Taxi\NaxiTaxi.cs" />
-    <Compile Include="Taxi\Taxi.cs" />
+    <Compile Include="Taxis\TaxiContext.cs" />
+    <Compile Include="Taxis\AlfaTaxi.cs" />
+    <Compile Include="Taxis\GoldTaxi.cs" />
+    <Compile Include="Taxis\NaxiTaxi.cs" />
+    <Compile Include="Taxis\Taxi.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaxiDispatcher.DAL\TaxiDispatcher.DAL.csproj">

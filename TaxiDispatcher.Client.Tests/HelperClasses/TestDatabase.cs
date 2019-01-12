@@ -2,44 +2,44 @@
 using System.Linq;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.Client.Tests.HelperClasses
+namespace TaxiDispatcher.Tests.HelperClasses
 {
     public class TestDatabase : IDatabase
     {
-        private List<DBRide> Rides = new List<DBRide>();
+        private List<DbRide> Rides = new List<DbRide>();
 
-        private List<DBTaxi> Taxis { get; } = new List<DBTaxi> {
-            new DBTaxi { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new DBLocation { CoordinateX = 1 }, TaxiCompany = "Naxi" },
-            new DBTaxi { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new DBLocation { CoordinateX = 4 }, TaxiCompany = "Naxi"  },
-            new DBTaxi { TaxiDriverId = 3, TaxiDriverName = "Dragan", CurrentLocation = new DBLocation { CoordinateX = 6 }, TaxiCompany = "Alfa"  },
-            new DBTaxi { TaxiDriverId = 4, TaxiDriverName = "Goran", CurrentLocation = new DBLocation { CoordinateX = 7 }, TaxiCompany = "Gold"  }
+        private List<DbTaxi> Taxis { get; } = new List<DbTaxi> {
+            new DbTaxi { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new DbLocation { CoordinateX = 1 }, TaxiCompany = "Naxi" },
+            new DbTaxi { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new DbLocation { CoordinateX = 4 }, TaxiCompany = "Naxi"  },
+            new DbTaxi { TaxiDriverId = 3, TaxiDriverName = "Dragan", CurrentLocation = new DbLocation { CoordinateX = 6 }, TaxiCompany = "Alfa"  },
+            new DbTaxi { TaxiDriverId = 4, TaxiDriverName = "Goran", CurrentLocation = new DbLocation { CoordinateX = 7 }, TaxiCompany = "Gold"  }
         };
 
         private const int StartingId = 1;
         private int GetNewRideId() => Rides.Any() ? Rides.Max(r => r.RideId) + 1 : StartingId;
 
-        public DBRide GetRide(int id) => Rides.Where(r => r.RideId == id).First();
+        public DbRide GetRide(int id) => Rides.Where(r => r.RideId == id).First();
 
-        public void SaveRide(DBRide ride)
+        public void SaveRide(DbRide ride)
         {
             ride.RideId = GetNewRideId();
             Rides.Add(ride);
         }
 
-        public List<DBTaxi> GetAllTaxis() => Taxis;
+        public List<DbTaxi> GetAllTaxis() => Taxis;
 
-        public DBTaxi GetTaxi(int id) => Taxis.First(t => t.TaxiDriverId == id);
+        public DbTaxi GetTaxi(int id) => Taxis.First(t => t.TaxiDriverId == id);
 
-        public void SaveExistingTaxi(DBTaxi dbTaxi)
+        public void SaveExistingTaxi(DbTaxi dbTaxi)
         {
             var taxiInDb = GetTaxi(dbTaxi.TaxiDriverId);
             taxiInDb.TaxiDriverName = dbTaxi.TaxiDriverName;
             taxiInDb.CurrentLocation = dbTaxi.CurrentLocation;
             taxiInDb.TaxiCompany = dbTaxi.TaxiCompany;
-            taxiInDb.DBRides = new List<DBRide>();
-            foreach (var dbRide in dbTaxi.DBRides)
+            taxiInDb.DbRides = new List<DbRide>();
+            foreach (var dbRide in dbTaxi.DbRides)
             {
-                taxiInDb.DBRides.Add(dbRide);
+                taxiInDb.DbRides.Add(dbRide);
             }
         }
     }

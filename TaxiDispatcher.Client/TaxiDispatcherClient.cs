@@ -1,6 +1,8 @@
 ﻿using System;
 using TaxiDispatcher.App;
 using TaxiDispatcher.App.CustomExceptions;
+using TaxiDispatcher.App.Taxis;
+using TaxiDispatcher.Client.Logging;
 using TaxiDispatcher.DAL;
 using TaxiDispatcher.DTO;
 

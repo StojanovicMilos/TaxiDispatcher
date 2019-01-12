@@ -1,9 +1,9 @@
 ﻿using TaxiDispatcher.App;
-using TaxiDispatcher.Client.Tests.HelperClasses;
-using TaxiDispatcher.DAL;
+using TaxiDispatcher.Client.Tests.AppTests.CalculatingRidePrice;
+using TaxiDispatcher.Tests.HelperClasses;
 using Xunit;
 
-namespace TaxiDispatcher.Client.Tests.AppTests.CalculatingRidePrice
+namespace TaxiDispatcher.Tests.AppTests.CalculatingRidePrice
 {
     public class CalculatingRidePriceTests
     {  

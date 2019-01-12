@@ -1,9 +1,9 @@
 ﻿using System;
-using TaxiDispatcher.Client.Tests.HelperClasses;
+using TaxiDispatcher.Client;
 using TaxiDispatcher.Tests.HelperClasses;
 using Xunit;
 
-namespace TaxiDispatcher.Client.Tests.OverallFunctionalityTests
+namespace TaxiDispatcher.Tests.OverallFunctionalityTests
 {
     public class OverallFunctionalityTests
     {

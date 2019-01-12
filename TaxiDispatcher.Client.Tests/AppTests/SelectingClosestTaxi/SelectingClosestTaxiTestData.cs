@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TaxiDispatcher.App;
 using TaxiDispatcher.Client.Tests.AppTests.SharedTestData;
-using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.Client.Tests.AppTests.SelectingClosestTaxi
 {

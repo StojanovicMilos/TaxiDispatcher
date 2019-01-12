@@ -1,5 +1,5 @@
 ﻿using System;
-using TaxiDispatcher.Client;
+using TaxiDispatcher.Client.Logging;
 
 namespace TaxiDispatcher.Tests.HelperClasses
 {

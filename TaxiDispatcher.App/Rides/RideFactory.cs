@@ -1,7 +1,8 @@
 ﻿using System;
+using TaxiDispatcher.App.Taxis;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.App.Rides
 {
     public static class RideFactory
     {
@@ -23,7 +24,7 @@ namespace TaxiDispatcher.App
             return new NightInterCityRide(startLocation, destinationLocation, rideDateTime, taxi);
         }
 
-        public static Ride CreateRide(DBRide dbRide, Taxi taxi)
+        public static Ride CreateRide(DbRide dbRide, Taxi taxi)
         {
             bool dayRide = dbRide.RideDateTime.Hour >= 6 && dbRide.RideDateTime.Hour <= 22;
             bool cityRide = dbRide.RideType == (int)RideType.City;

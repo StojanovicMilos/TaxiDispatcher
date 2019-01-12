@@ -1,6 +1,7 @@
-﻿using System;
-using TaxiDispatcher.App.CustomExceptions;
+﻿using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.App.Extensions;
+using TaxiDispatcher.App.Rides;
+using TaxiDispatcher.App.Taxis;
 using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.App
@@ -39,9 +40,9 @@ namespace TaxiDispatcher.App
         {
             Taxi rideTaxi = ride.RideTaxi;
             rideTaxi.AcceptRide(ride);
-            var dbTaxi = rideTaxi.ToDBTaxi();
+            var dbTaxi = rideTaxi.ToDbTaxi();
             _database.SaveExistingTaxi(dbTaxi);
-            _database.SaveRide(ride.ToDBRide(dbTaxi));
+            _database.SaveRide(ride.ToDbRide(dbTaxi));
         }
     }
 }

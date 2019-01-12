@@ -4,10 +4,10 @@ namespace TaxiDispatcher.DAL
 {
     public interface IDatabase
     {
-        DBRide GetRide(int id);
-        void SaveRide(DBRide ride);
-        List<DBTaxi> GetAllTaxis();
-        DBTaxi GetTaxi(int id);
-        void SaveExistingTaxi(DBTaxi dbTaxi);
+        DbRide GetRide(int id);
+        void SaveRide(DbRide ride);
+        List<DbTaxi> GetAllTaxis();
+        DbTaxi GetTaxi(int id);
+        void SaveExistingTaxi(DbTaxi dbTaxi);
     }
 }

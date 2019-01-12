@@ -1,7 +1,8 @@
 ﻿using System;
+using TaxiDispatcher.App.Taxis;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.App.Rides
 {
     public abstract class Ride
     {
@@ -23,15 +24,15 @@ namespace TaxiDispatcher.App
             Price = taxi.CalculateInitialRidePrice(startLocation, destinationLocation) * RidePriceMultiplier;
         }
 
-        public abstract DBRide ToDBRide(DBTaxi dbTaxi);
+        public abstract DbRide ToDbRide(DbTaxi dbTaxi);
 
-        protected DBRide ToDBRideBase(DBTaxi dbTaxi)
+        protected DbRide ToDbRideBase(DbTaxi dbTaxi)
         {
-            return new DBRide
+            return new DbRide
             {
                 RideId = RideId,
-                StartLocation = StartLocation.ToDBLocation(),
-                DestinationLocation = DestinationLocation.ToDBLocation(),
+                StartLocation = StartLocation.ToDbLocation(),
+                DestinationLocation = DestinationLocation.ToDbLocation(),
                 RideTaxi = dbTaxi,
                 Price = Price,
                 RideDateTime = RideDateTime,

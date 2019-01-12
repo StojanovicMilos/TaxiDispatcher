@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TaxiDispatcher.App.Rides;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.App.Taxis
 {
     public abstract class Taxi
     {
@@ -13,12 +13,12 @@ namespace TaxiDispatcher.App
         public List<Ride> Rides { get; set; } = new List<Ride>();
         protected abstract int PricePerDistance { get; }
 
-        protected Taxi(DBTaxi dbTaxi)
+        protected Taxi(DbTaxi dbTaxi)
         {
             TaxiDriverId = dbTaxi.TaxiDriverId;
             TaxiDriverName = dbTaxi.TaxiDriverName;
             CurrentLocation = new Location(dbTaxi.CurrentLocation);
-            foreach (var dbRide in dbTaxi.DBRides)
+            foreach (var dbRide in dbTaxi.DbRides)
             {
                 Rides.Add(RideFactory.CreateRide(dbRide, this));
             }
@@ -36,19 +36,19 @@ namespace TaxiDispatcher.App
             CurrentLocation = ride.DestinationLocation;
         }
 
-        public abstract DBTaxi ToDBTaxi();
+        public abstract DbTaxi ToDbTaxi();
 
-        protected DBTaxi ToDBTaxiBase()
+        protected DbTaxi ToDbTaxiBase()
         {
-            var dbTaxi = new DBTaxi
+            var dbTaxi = new DbTaxi
             {
                 TaxiDriverId = TaxiDriverId,
                 TaxiDriverName = TaxiDriverName,
-                CurrentLocation = CurrentLocation.ToDBLocation()
+                CurrentLocation = CurrentLocation.ToDbLocation()
             };
             foreach (var ride in Rides)
             {
-                dbTaxi.DBRides.Add(ride.ToDBRide(dbTaxi));
+                dbTaxi.DbRides.Add(ride.ToDbRide(dbTaxi));
             }
             return dbTaxi;
         }

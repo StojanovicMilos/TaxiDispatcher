@@ -41,12 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBLocation.cs" />
-    <Compile Include="DBTaxi.cs" />
+    <Compile Include="DbLocation.cs" />
+    <Compile Include="DbTaxi.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="InMemoryDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DBRide.cs" />
+    <Compile Include="DbRide.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

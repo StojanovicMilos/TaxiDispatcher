@@ -3,7 +3,7 @@ using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.DAL;
 using TaxiDispatcher.DTO;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.App.Taxis
 {
     public class TaxiContext
     {
@@ -40,7 +40,7 @@ namespace TaxiDispatcher.App
             return ConvertToToTaxi(dbTaxi);
         }
 
-        private static Taxi ConvertToToTaxi(DBTaxi dbTaxi)
+        private static Taxi ConvertToToTaxi(DbTaxi dbTaxi)
         {
             switch (dbTaxi.TaxiCompany)
             {

@@ -1,6 +1,6 @@
 ﻿namespace TaxiDispatcher.DAL
 {
-    public class DBLocation
+    public class DbLocation
     {
         public int CoordinateX { get; set; }
     }

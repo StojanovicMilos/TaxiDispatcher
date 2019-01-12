@@ -2,12 +2,12 @@
 
 namespace TaxiDispatcher.DAL
 {
-    public class DBTaxi
+    public class DbTaxi
     {
         public int TaxiDriverId { get; set; }
         public string TaxiDriverName { get; set; }
-        public DBLocation CurrentLocation { get; set; }
-        public List<DBRide> DBRides { get; set; } = new List<DBRide>();
+        public DbLocation CurrentLocation { get; set; }
+        public List<DbRide> DbRides { get; set; } = new List<DbRide>();
         public string TaxiCompany { get; set; }
     }
 }
