@@ -61,6 +61,10 @@
       <Project>{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}</Project>
       <Name>TaxiDispatcher.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaxiDispatcher.DTO\TaxiDispatcher.DTO.csproj">
+      <Project>{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}</Project>
+      <Name>TaxiDispatcher.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

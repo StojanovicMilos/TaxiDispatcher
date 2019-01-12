@@ -5,8 +5,8 @@ namespace TaxiDispatcher.DAL
     public interface IDatabase
     {
         Ride GetRide(int id);
-        List<int> GetRide_Ids();
         void SaveRide(Ride ride);
         Taxi[] Taxis { get; }
+        Taxi GetTaxi(int id);
     }
 }

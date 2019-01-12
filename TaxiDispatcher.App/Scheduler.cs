@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.App.Extensions;
 using TaxiDispatcher.DAL;
@@ -42,20 +41,6 @@ namespace TaxiDispatcher.App
             rideTaxi.AcceptRide(ride);
             rideTaxi.PerformRide(ride);
             Console.WriteLine("Ride accepted, waiting for driver: " + rideTaxi.Taxi_driver_name);
-        }
-
-        public List<Ride> GetRideList(int driver_id)
-        {
-            List<Ride> rides = new List<Ride>();
-            List<int> ids = _database.GetRide_Ids();
-            foreach (int id in ids)
-            {
-                Ride ride = _database.GetRide(id);
-                if (ride.RideTaxi.Taxi_driver_id == driver_id)
-                    rides.Add(ride);
-            }
-
-            return rides;
         }
     }
 }

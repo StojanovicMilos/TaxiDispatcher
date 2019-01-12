@@ -2,6 +2,7 @@
 using TaxiDispatcher.App;
 using TaxiDispatcher.App.CustomExceptions;
 using TaxiDispatcher.DAL;
+using TaxiDispatcher.DTO;
 
 namespace TaxiDispatcher.Client
 {
@@ -11,10 +12,10 @@ namespace TaxiDispatcher.Client
         private readonly Scheduler _scheduler = new Scheduler();
         private readonly RideOrder[] _rideOrders = new RideOrder[]
             {
-                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime =  new DateTime(2018, 1, 1, 23, 0, 0)},
-                new RideOrder {StartLocation = new Location { CoordinateX= 0 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.InterCity, RideDateTime =  new DateTime(2018, 1, 1, 9, 0, 0)},
-                new RideOrder {StartLocation = new Location { CoordinateX= 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)},
-                new RideOrder {StartLocation = new Location { CoordinateX= 35 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.City, RideDateTime =  new DateTime(2018, 1, 1, 11, 0, 0)}
+                new RideOrder { StartLocation = new Location { CoordinateX = 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 23, 0, 0) },
+                new RideOrder { StartLocation = new Location { CoordinateX = 0 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.InterCity, RideDateTime = new DateTime(2018, 1, 1, 9, 0, 0) },
+                new RideOrder { StartLocation = new Location { CoordinateX = 5 }, DestinationLocation = new Location { CoordinateX = 0 }, RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) },
+                new RideOrder { StartLocation = new Location { CoordinateX = 35 }, DestinationLocation = new Location { CoordinateX = 12 }, RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) }
             };
 
         public TaxiDispatcherClient() : this(new Logger()) { }
@@ -26,19 +27,18 @@ namespace TaxiDispatcher.Client
 
         public void Run()
         {
-            OrderRides();
-            const int TotalEarningsCalculationDriverId = 2;
-            int totalEarnings = CalculateTotalEarningsForDriver(TotalEarningsCalculationDriverId);
-            LogTotalEarnings(totalEarnings);
+            PerformRides();
+            TaxiDTO taxiWithEarnings = GetTaxiWithEarningsById(2);
+            LogTaxiWithEarnings(taxiWithEarnings);
         }
 
-        private void OrderRides()
+        private void PerformRides()
         {
             foreach (var rideOrder in _rideOrders)
             {
                 try
                 {
-                    OrderRide(rideOrder);
+                    PerformRide(rideOrder);
                 }
                 catch (NoAvailableTaxiVehiclesException e)
                 {
@@ -47,7 +47,7 @@ namespace TaxiDispatcher.Client
             }
         }
 
-        private void OrderRide(RideOrder rideOrder)
+        private void PerformRide(RideOrder rideOrder)
         {
             _logger.WriteLine(string.Format("Ordering ride from {0} to {1}...", rideOrder.StartLocation, rideOrder.DestinationLocation));
             var ride = _scheduler.OrderRide(rideOrder);
@@ -55,21 +55,16 @@ namespace TaxiDispatcher.Client
             _logger.WriteLine("");
         }
 
-        private int CalculateTotalEarningsForDriver(int driverId)
-        {
-            _logger.WriteLine(string.Format("Driver with ID = {0} earned today:", driverId));
-            int total = 0;
-            foreach (Ride r in _scheduler.GetRideList(driverId))
-            {
-                total += r.Price;
-                _logger.WriteLine("Price: " + r.Price);
-            }
-            return total;
-        }
+        private TaxiDTO GetTaxiWithEarningsById(int id) => new TaxiContext().GetTaxiWithEarningsById(id);
 
-        private void LogTotalEarnings(int total)
+        private void LogTaxiWithEarnings(TaxiDTO taxiWithEarnings)
         {
-            _logger.WriteLine("Total: " + total);
+            _logger.WriteLine(string.Format("Driver with ID = {0} earned today:", taxiWithEarnings.TaxiDriverId));
+            foreach (var ride in taxiWithEarnings.Rides)
+            {
+                _logger.WriteLine("Price: " + ride.Price);
+            }
+            _logger.WriteLine("Total: " + taxiWithEarnings.TotalEarnings);
         }
     }
 }

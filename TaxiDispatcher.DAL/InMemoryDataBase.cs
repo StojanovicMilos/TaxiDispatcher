@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TaxiDispatcher.DAL
 {
@@ -51,15 +52,6 @@ namespace TaxiDispatcher.DAL
             return ride;
         }
 
-        public List<int> GetRide_Ids()
-        {
-            List<int> ids = new List<int>();
-            foreach (Ride ride in Rides)
-            {
-                ids.Add(ride.Ride_id);
-            }
-
-            return ids;
-        }
+        public Taxi GetTaxi(int id) =>_taxis.First(t => t.Taxi_driver_id == id);
     }
 }

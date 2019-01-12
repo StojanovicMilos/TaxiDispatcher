@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}</ProjectGuid>
+    <ProjectGuid>{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TaxiDispatcher.App</RootNamespace>
-    <AssemblyName>TaxiDispatcher.App</AssemblyName>
+    <RootNamespace>TaxiDispatcher.DTO</RootNamespace>
+    <AssemblyName>TaxiDispatcher.DTO</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,23 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomExceptions\NoAvailableTaxiVehiclesException.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RideFactory.cs" />
-    <Compile Include="Scheduler.cs" />
-    <Compile Include="TaxiContext.cs" />
+    <Compile Include="RideDTO.cs" />
+    <Compile Include="TaxiDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaxiDispatcher.DAL\TaxiDispatcher.DAL.csproj">
-      <Project>{eeaadf97-0a13-4d2d-8ce7-e81aab9762c4}</Project>
+      <Project>{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}</Project>
       <Name>TaxiDispatcher.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaxiDispatcher.DTO\TaxiDispatcher.DTO.csproj">
-      <Project>{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}</Project>
-      <Name>TaxiDispatcher.DTO</Name>
-    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

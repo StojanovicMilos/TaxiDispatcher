@@ -32,9 +32,6 @@ namespace TaxiDispatcher.Client.Tests.HelperClasses
             return Rides.Where(r => r.Ride_id == id).First();
         }
 
-        public List<int> GetRide_Ids()
-        {
-            return Rides.Select(x => x.Ride_id).ToList();
-        }
+        public Taxi GetTaxi(int id) => Taxis.First(t => t.Taxi_driver_id == id);
     }
 }

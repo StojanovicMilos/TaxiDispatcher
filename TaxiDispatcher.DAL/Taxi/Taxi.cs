@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace TaxiDispatcher.DAL
 {
@@ -14,6 +15,8 @@ namespace TaxiDispatcher.DAL
         public int CalculateInitialRidePrice(RideOrder rideOrder) => rideOrder.Distance() * PricePerDistance;
 
         public int DistanceTo(Location startLocation) => startLocation.DistanceTo(CurrentLocation);
+
+        public int CalculateTotalEarnings() => Rides.Sum(r => r.Price);
 
         public void PerformRide(Ride ride) => CurrentLocation = ride.DestinationLocation;
 
