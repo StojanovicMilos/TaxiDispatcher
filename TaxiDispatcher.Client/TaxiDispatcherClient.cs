@@ -51,8 +51,9 @@ namespace TaxiDispatcher.Client
         {
             _logger.WriteLine(string.Format("Ordering ride from {0} to {1}...", rideOrder.StartLocation, rideOrder.DestinationLocation));
             var ride = _scheduler.OrderRide(rideOrder);
+            _logger.WriteLine("Ride ordered, price: " + ride.Price.ToString());
             _scheduler.AcceptRide(ride);
-            _logger.WriteLine("");
+            Console.WriteLine("Ride accepted, waiting for driver: " + ride.RideTaxi.TaxiDriverName + Environment.NewLine);
         }
 
         private TaxiDTO GetTaxiWithEarningsById(int id) => new TaxiContext().GetTaxiWithEarningsById(id);

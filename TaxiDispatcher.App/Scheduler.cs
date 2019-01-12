@@ -19,9 +19,7 @@ namespace TaxiDispatcher.App
         public Ride OrderRide(RideOrder rideOrder)
         {
             Taxi closestTaxi = FindClosestTaxi(rideOrder.StartLocation);
-            Ride ride = RideFactory.CreateRide(rideOrder, closestTaxi);
-            Console.WriteLine("Ride ordered, price: " + ride.Price.ToString());
-            return ride;
+            return RideFactory.CreateRide(rideOrder, closestTaxi);
         }
 
         private const int MAXIMUMORDERDISTANCE = 15;
@@ -40,7 +38,6 @@ namespace TaxiDispatcher.App
             Taxi rideTaxi = ride.RideTaxi;
             rideTaxi.AcceptRide(ride);
             rideTaxi.PerformRide(ride);
-            Console.WriteLine("Ride accepted, waiting for driver: " + rideTaxi.TaxiDriverName);
         }
     }
 }
