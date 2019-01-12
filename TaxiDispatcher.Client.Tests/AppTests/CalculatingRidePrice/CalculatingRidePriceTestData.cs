@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TaxiDispatcher.Client.Tests.AppTests.SharedTestData;
+using TaxiDispatcher.Tests.AppTests.SharedTestData;
 
-namespace TaxiDispatcher.Client.Tests.AppTests.CalculatingRidePrice
+namespace TaxiDispatcher.Tests.AppTests.CalculatingRidePrice
 {
     public class CalculatingRidePriceTestData
     {

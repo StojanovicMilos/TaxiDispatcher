@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using TaxiDispatcher.App.CustomExceptions;
+using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.DAL;
 using TaxiDispatcher.DTO;
 
-namespace TaxiDispatcher.App.Taxis
+namespace TaxiDispatcher.BL.Taxis
 {
     public class TaxiContext
     {

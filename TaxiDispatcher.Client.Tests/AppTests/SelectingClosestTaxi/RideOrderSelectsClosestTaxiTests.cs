@@ -1,7 +1,7 @@
 ﻿using System;
 using TaxiDispatcher.App;
-using TaxiDispatcher.App.CustomExceptions;
-using TaxiDispatcher.Client.Tests.AppTests.SelectingClosestTaxi;
+using TaxiDispatcher.BL;
+using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.Tests.HelperClasses;
 using Xunit;
 

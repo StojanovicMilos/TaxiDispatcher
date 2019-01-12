@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaxiDispatcher.App.CustomExceptions
+namespace TaxiDispatcher.BL.CustomExceptions
 {
     public class NoAvailableTaxiVehiclesException : Exception
     {

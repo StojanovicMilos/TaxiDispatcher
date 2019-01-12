@@ -1,5 +1,5 @@
 ﻿using TaxiDispatcher.App;
-using TaxiDispatcher.Client.Tests.AppTests.CalculatingRidePrice;
+using TaxiDispatcher.BL;
 using TaxiDispatcher.Tests.HelperClasses;
 using Xunit;
 

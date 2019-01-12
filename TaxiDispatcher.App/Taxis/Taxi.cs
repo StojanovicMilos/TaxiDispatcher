@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TaxiDispatcher.App.Rides;
+using TaxiDispatcher.App;
+using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App.Taxis
+namespace TaxiDispatcher.BL.Taxis
 {
     public abstract class Taxi
     {

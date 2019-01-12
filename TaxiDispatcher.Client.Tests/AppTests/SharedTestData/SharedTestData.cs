@@ -1,7 +1,7 @@
 ﻿using System;
 using TaxiDispatcher.App;
 
-namespace TaxiDispatcher.Client.Tests.AppTests.SharedTestData
+namespace TaxiDispatcher.Tests.AppTests.SharedTestData
 {
     public static class SharedRideDateTime
     {

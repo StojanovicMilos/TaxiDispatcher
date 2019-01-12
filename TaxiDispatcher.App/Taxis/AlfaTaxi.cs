@@ -1,6 +1,6 @@
 ﻿using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App.Taxis
+namespace TaxiDispatcher.BL.Taxis
 {
     public class AlfaTaxi : Taxi
     {

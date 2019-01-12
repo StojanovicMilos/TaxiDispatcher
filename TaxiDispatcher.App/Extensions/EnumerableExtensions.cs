@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TaxiDispatcher.App.Extensions
+namespace TaxiDispatcher.BL.Extensions
 {
     public static class EnumerableExtensions
     {

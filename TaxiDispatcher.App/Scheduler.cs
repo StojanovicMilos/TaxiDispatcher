@@ -1,10 +1,11 @@
-﻿using TaxiDispatcher.App.CustomExceptions;
-using TaxiDispatcher.App.Extensions;
-using TaxiDispatcher.App.Rides;
-using TaxiDispatcher.App.Taxis;
+﻿using TaxiDispatcher.App;
+using TaxiDispatcher.BL.CustomExceptions;
+using TaxiDispatcher.BL.Extensions;
+using TaxiDispatcher.BL.Rides;
+using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.BL
 {
     public class Scheduler
     {

@@ -1,8 +1,9 @@
 ﻿using System;
-using TaxiDispatcher.App.Taxis;
+using TaxiDispatcher.App;
+using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App.Rides
+namespace TaxiDispatcher.BL.Rides
 {
     public class DayInterCityRide : Ride
     {
