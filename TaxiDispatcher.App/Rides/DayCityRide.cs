@@ -9,7 +9,10 @@ namespace TaxiDispatcher.BL.Rides
     {
         protected override int RidePriceMultiplier => 1;
 
-        public DayCityRide(Location startLocation, Location destinationLocation, DateTime rideDateTime, Taxi taxi) : base(startLocation, destinationLocation, rideDateTime, taxi) { }
+        public DayCityRide(Location startLocation, Location destinationLocation, DateTime rideDateTime, Taxi taxi, int rideId = 0) 
+            : base(startLocation, destinationLocation, rideDateTime, taxi, rideId)
+        {
+        }
 
         public override DbRide ToDbRide(DbTaxi dbTaxi)
         {
