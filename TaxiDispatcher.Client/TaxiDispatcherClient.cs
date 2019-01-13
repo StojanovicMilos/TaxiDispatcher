@@ -4,7 +4,6 @@ using TaxiDispatcher.BL;
 using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.Client.Logging;
-using TaxiDispatcher.DAL;
 using TaxiDispatcher.DTO;
 
 namespace TaxiDispatcher.Client
@@ -28,11 +27,11 @@ namespace TaxiDispatcher.Client
             _scheduler = new Scheduler();
         }
 
-        public TaxiDispatcherClient(ILogger logger, IDatabase database)
+        public TaxiDispatcherClient(ILogger logger, Scheduler scheduler, TaxiContext taxiContext)
         {
             _logger = logger;
-            _taxiContext = new TaxiContext(database);
-            _scheduler = new Scheduler(database);
+            _taxiContext = taxiContext;
+            _scheduler = scheduler;
         }
 
         public void Run()
