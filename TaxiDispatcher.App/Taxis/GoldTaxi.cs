@@ -1,5 +1,4 @@
-﻿using TaxiDispatcher.DAL;
-using TaxiDispatcher.DAL.Entities;
+﻿using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Taxis
 {

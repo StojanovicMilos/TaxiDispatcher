@@ -2,7 +2,6 @@
 using System.Linq;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
-using TaxiDispatcher.DAL;
 using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Taxis

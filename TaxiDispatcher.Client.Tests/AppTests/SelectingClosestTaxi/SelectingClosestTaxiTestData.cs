@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaxiDispatcher.BL;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.Tests.AppTests.SharedTestData;

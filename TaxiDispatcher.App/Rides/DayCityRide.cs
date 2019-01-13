@@ -1,7 +1,6 @@
 ﻿using System;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Taxis;
-using TaxiDispatcher.DAL;
 using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Rides
