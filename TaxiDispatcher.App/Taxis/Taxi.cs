@@ -8,17 +8,19 @@ namespace TaxiDispatcher.BL.Taxis
 {
     public abstract class Taxi
     {
-        public int TaxiDriverId { get; set; }
-        public string TaxiDriverName { get; set; }
-        public Location CurrentLocation { get; set; }
-        public List<Ride> Rides { get; set; } = new List<Ride>();
+        private Location _currentLocation;
+        
         protected abstract int PricePerDistance { get; }
+
+        public int TaxiDriverId { get; }
+        public string TaxiDriverName { get; }
+        public List<Ride> Rides { get; } = new List<Ride>();
 
         protected Taxi(DbTaxi dbTaxi)
         {
             TaxiDriverId = dbTaxi.TaxiDriverId;
             TaxiDriverName = dbTaxi.TaxiDriverName;
-            CurrentLocation = new Location(dbTaxi.CurrentLocation);
+            _currentLocation = new Location(dbTaxi.CurrentLocation);
             foreach (var dbRide in dbTaxi.DbRides)
             {
                 Rides.Add(RideFactory.CreateRide(dbRide, this));
@@ -27,14 +29,14 @@ namespace TaxiDispatcher.BL.Taxis
 
         public int CalculateInitialRidePrice(Location startLocation, Location destinationLocation) => startLocation.DistanceTo(destinationLocation) * PricePerDistance;
 
-        public int DistanceTo(Location startLocation) => startLocation.DistanceTo(CurrentLocation);
+        public int DistanceTo(Location startLocation) => startLocation.DistanceTo(_currentLocation);
 
         public int CalculateTotalEarnings() => Rides.Sum(r => r.Price);
 
         public void AcceptRide(Ride ride)
         {
             Rides.Add(ride);
-            CurrentLocation = ride.DestinationLocation;
+            _currentLocation = ride.DestinationLocation;
         }
 
         public abstract DbTaxi ToDbTaxi();
@@ -45,7 +47,7 @@ namespace TaxiDispatcher.BL.Taxis
             {
                 TaxiDriverId = TaxiDriverId,
                 TaxiDriverName = TaxiDriverName,
-                CurrentLocation = CurrentLocation.ToDbLocation()
+                CurrentLocation = _currentLocation.ToDbLocation()
             };
             foreach (var ride in Rides)
             {
