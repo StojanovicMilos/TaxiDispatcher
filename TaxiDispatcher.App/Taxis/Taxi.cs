@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
@@ -18,11 +19,18 @@ namespace TaxiDispatcher.BL.Taxis
 
         protected Taxi(DbTaxi dbTaxi)
         {
+            if (dbTaxi == null)
+                throw new ArgumentNullException(nameof(dbTaxi));
+            if (dbTaxi.CurrentLocation == null)
+                throw new ArgumentNullException(nameof(dbTaxi.CurrentLocation));
+
             TaxiDriverId = dbTaxi.TaxiDriverId;
             TaxiDriverName = dbTaxi.TaxiDriverName;
             _currentLocation = new Location(dbTaxi.CurrentLocation);
             foreach (var dbRide in dbTaxi.DbRides)
             {
+                if (dbRide == null)
+                    throw new ArgumentNullException(nameof(dbRide));
                 Rides.Add(RideFactory.CreateRide(dbRide, this));
             }
         }
@@ -35,6 +43,8 @@ namespace TaxiDispatcher.BL.Taxis
 
         public void AcceptRide(Ride ride)
         {
+            if (ride == null)
+                throw new ArgumentNullException(nameof(ride));
             Rides.Add(ride);
             _currentLocation = ride.DestinationLocation;
         }

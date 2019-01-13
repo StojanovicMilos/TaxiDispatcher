@@ -14,6 +14,8 @@ namespace TaxiDispatcher.BL.Locations
 
         public Location(DbLocation dbLocation)
         {
+            if (dbLocation == null)
+                throw new ArgumentNullException(nameof(dbLocation));
             _coordinateX = dbLocation.CoordinateX;
         }
 
