@@ -35,13 +35,13 @@ namespace TaxiDispatcher.BL.Taxis
             };
         }
 
-        public Taxi GetTaxiById(int id)
+        private Taxi GetTaxiById(int id)
         {
             var dbTaxi = _database.GetTaxi(id);
-            return ConvertToToTaxi(dbTaxi);
+            return ConvertToTaxi(dbTaxi);
         }
 
-        private static Taxi ConvertToToTaxi(DbTaxi dbTaxi)
+        private static Taxi ConvertToTaxi(DbTaxi dbTaxi)
         {
             switch (dbTaxi.TaxiCompany)
             {
@@ -61,7 +61,7 @@ namespace TaxiDispatcher.BL.Taxis
             List<Taxi> taxis = new List<Taxi>();
             foreach (var dbTaxi in dbTaxis)
             {
-                taxis.Add(ConvertToToTaxi(dbTaxi));
+                taxis.Add(ConvertToTaxi(dbTaxi));
             }
             return taxis;
         }
