@@ -1,5 +1,5 @@
 ﻿using System;
-using TaxiDispatcher.App;
+using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.DAL;
 

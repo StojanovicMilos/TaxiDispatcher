@@ -1,6 +1,7 @@
 ﻿using System;
+using TaxiDispatcher.BL.Locations;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.BL.Rides
 {
     public enum RideType { City = 0, InterCity = 1 };
 

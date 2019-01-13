@@ -1,5 +1,7 @@
 ﻿using System;
-using TaxiDispatcher.App;
+using TaxiDispatcher.BL;
+using TaxiDispatcher.BL.Locations;
+using TaxiDispatcher.BL.Rides;
 
 namespace TaxiDispatcher.Tests.AppTests.SharedTestData
 {

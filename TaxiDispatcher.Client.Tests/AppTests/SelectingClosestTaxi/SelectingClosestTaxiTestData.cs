@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaxiDispatcher.App;
+using TaxiDispatcher.BL;
+using TaxiDispatcher.BL.Locations;
+using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.Tests.AppTests.SharedTestData;
 
 namespace TaxiDispatcher.Tests.AppTests.SelectingClosestTaxi

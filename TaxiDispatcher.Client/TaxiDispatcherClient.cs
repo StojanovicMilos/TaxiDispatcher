@@ -1,7 +1,8 @@
 ﻿using System;
-using TaxiDispatcher.App;
 using TaxiDispatcher.BL;
 using TaxiDispatcher.BL.CustomExceptions;
+using TaxiDispatcher.BL.Locations;
+using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.Client.Logging;
 using TaxiDispatcher.DTO;

@@ -1,11 +1,11 @@
 ﻿using System;
 using TaxiDispatcher.DAL;
 
-namespace TaxiDispatcher.App
+namespace TaxiDispatcher.BL.Locations
 {
     public class Location
     {
-        private int _coordinateX;
+        private readonly int _coordinateX;
 
         public Location(int coordinateX)
         {
