@@ -3,6 +3,12 @@ using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Locations
 {
+    public enum City
+    {
+        City1 = 0,
+        City2 = 1
+    };
+
     public class Location
     {
         private readonly int _coordinateX;
@@ -31,7 +37,10 @@ namespace TaxiDispatcher.BL.Locations
 
         public DbLocation ToDbLocation()
         {
-            return new DbLocation { CoordinateX = _coordinateX };
+            return new DbLocation {CoordinateX = _coordinateX};
         }
+
+        public City City => _coordinateX < 11 ? City.City1 : City.City2;
+
     }
 }

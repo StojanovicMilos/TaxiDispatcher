@@ -14,15 +14,17 @@ namespace TaxiDispatcher.Client
         private readonly ILogger _logger;
         private readonly TaxiContext _taxiContext;
         private readonly Scheduler _scheduler;
-        private readonly RideOrder[] _rideOrders = {
-                new RideOrder { StartLocation = new Location(5), DestinationLocation = new Location(0), RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 23, 0, 0) },
-                new RideOrder { StartLocation = new Location(0), DestinationLocation = new Location(12), RideType = RideType.InterCity, RideDateTime = new DateTime(2018, 1, 1, 9, 0, 0) },
-                new RideOrder { StartLocation = new Location(5), DestinationLocation = new Location(0), RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) },
-                new RideOrder { StartLocation = new Location(35), DestinationLocation = new Location(12), RideType = RideType.City, RideDateTime = new DateTime(2018, 1, 1, 11, 0, 0) }
-            };
+        private readonly RideOrder[] _rideOrders =
+        {
+            new RideOrder(startLocation: new Location(5), destinationLocation: new Location(0), rideDateTime: new DateTime(2018, 1, 1, 23, 0, 0)),
+            new RideOrder(startLocation: new Location(0), destinationLocation: new Location(12), rideDateTime: new DateTime(2018, 1, 1, 9, 0, 0)),
+            new RideOrder(startLocation: new Location(5), destinationLocation: new Location(0), rideDateTime: new DateTime(2018, 1, 1, 11, 0, 0)),
+            new RideOrder(startLocation: new Location(35), destinationLocation: new Location(12), rideDateTime: new DateTime(2018, 1, 1, 11, 0, 0))
+        };
 
         public TaxiDispatcherClient()
         {
+            
             _logger = new Logger();
             _taxiContext = new TaxiContext();
             _scheduler = new Scheduler();

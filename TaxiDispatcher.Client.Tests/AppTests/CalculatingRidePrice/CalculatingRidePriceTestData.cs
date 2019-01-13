@@ -20,8 +20,8 @@ namespace TaxiDispatcher.Tests.AppTests.CalculatingRidePrice
             {
                 new object[] {SharedRideOrderTestData.RideOrderCityDayNaxiTaxi, ExpectedRidePrice(10)},
                 new object[] {SharedRideOrderTestData.RideOrderCityNightNaxiTaxi, ExpectedRidePrice(20)},
-                new object[] {SharedRideOrderTestData.RideOrderInterCityDayNaxiTaxi, ExpectedRidePrice(20)},
-                new object[] {SharedRideOrderTestData.RideOrderInterCityNightNaxiTaxi, ExpectedRidePrice(40)},
+                new object[] {SharedRideOrderTestData.RideOrderInterCityDayNaxiTaxi, ExpectedRidePrice(200)},
+                new object[] {SharedRideOrderTestData.RideOrderInterCityNightNaxiTaxi, ExpectedRidePrice(400)},
             };
 
         public static IEnumerable<object[]> CalculatingRidePricesForAlfaTaxiTestData =>
@@ -29,8 +29,8 @@ namespace TaxiDispatcher.Tests.AppTests.CalculatingRidePrice
             {
                 new object[] {SharedRideOrderTestData.RideOrderCityDayAlfaTaxi, ExpectedRidePrice(15)},
                 new object[] {SharedRideOrderTestData.RideOrderCityNightAlfaTaxi, ExpectedRidePrice(30)},
-                new object[] {SharedRideOrderTestData.RideOrderInterCityDayAlfaTaxi, ExpectedRidePrice(30)},
-                new object[] {SharedRideOrderTestData.RideOrderInterCityNightAlfaTaxi, ExpectedRidePrice(60)}
+                new object[] {SharedRideOrderTestData.RideOrderInterCityDayAlfaTaxi, ExpectedRidePrice(300)},
+                new object[] {SharedRideOrderTestData.RideOrderInterCityNightAlfaTaxi, ExpectedRidePrice(600)}
             };
 
         public static IEnumerable<object[]> CalculatingRidePricesForGoldTaxiTestData =>
@@ -38,8 +38,8 @@ namespace TaxiDispatcher.Tests.AppTests.CalculatingRidePrice
             {
                 new object[] {SharedRideOrderTestData.RideOrderCityDayGoldTaxi, ExpectedRidePrice(13)},
                 new object[] {SharedRideOrderTestData.RideOrderCityNightGoldTaxi, ExpectedRidePrice(26)},
-                new object[] {SharedRideOrderTestData.RideOrderInterCityDayGoldTaxi, ExpectedRidePrice(26)},
-                new object[] {SharedRideOrderTestData.RideOrderInterCityNightGoldTaxi, ExpectedRidePrice(52)}
+                new object[] {SharedRideOrderTestData.RideOrderInterCityDayGoldTaxi, ExpectedRidePrice(260)},
+                new object[] {SharedRideOrderTestData.RideOrderInterCityNightGoldTaxi, ExpectedRidePrice(520)}
             };
     }
 }
