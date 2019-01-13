@@ -1,4 +1,4 @@
-﻿namespace TaxiDispatcher.DAL
+﻿namespace TaxiDispatcher.DAL.Entities
 {
     public class DbLocation
     {

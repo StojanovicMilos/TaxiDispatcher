@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.DAL;
+using TaxiDispatcher.DAL.Entities;
 using TaxiDispatcher.DTO;
 
 namespace TaxiDispatcher.BL.Taxis

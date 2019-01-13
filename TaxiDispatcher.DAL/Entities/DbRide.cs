@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaxiDispatcher.DAL
+namespace TaxiDispatcher.DAL.Entities
 {
     public class DbRide
     {

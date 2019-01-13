@@ -1,5 +1,6 @@
 ﻿using System;
 using TaxiDispatcher.DAL;
+using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Locations
 {

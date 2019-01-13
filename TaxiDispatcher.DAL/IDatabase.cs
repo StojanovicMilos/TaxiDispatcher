@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.DAL
 {

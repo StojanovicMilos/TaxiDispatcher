@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TaxiDispatcher.DAL
+namespace TaxiDispatcher.DAL.Entities
 {
     public class DbTaxi
     {
