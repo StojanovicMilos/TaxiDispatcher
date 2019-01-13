@@ -7,29 +7,26 @@ namespace TaxiDispatcher.Tests.HelperClasses
 {
     public class TestDatabase : IDatabase
     {
-        private List<DbRide> Rides = new List<DbRide>();
-
-        private List<DbTaxi> Taxis { get; } = new List<DbTaxi> {
+        private readonly List<DbTaxi> _taxis = new List<DbTaxi> {
             new DbTaxi { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new DbLocation { CoordinateX = 1 }, TaxiCompany = "Naxi" },
             new DbTaxi { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new DbLocation { CoordinateX = 4 }, TaxiCompany = "Naxi"  },
             new DbTaxi { TaxiDriverId = 3, TaxiDriverName = "Dragan", CurrentLocation = new DbLocation { CoordinateX = 6 }, TaxiCompany = "Alfa"  },
             new DbTaxi { TaxiDriverId = 4, TaxiDriverName = "Goran", CurrentLocation = new DbLocation { CoordinateX = 7 }, TaxiCompany = "Gold"  }
         };
 
-        private const int StartingId = 1;
-        private int GetNewRideId() => Rides.Any() ? Rides.Max(r => r.RideId) + 1 : StartingId;
-
-        public DbRide GetRide(int id) => Rides.Where(r => r.RideId == id).First();
-
+        private readonly List<DbRide> _rides = new List<DbRide>();
         public void SaveRide(DbRide ride)
         {
             ride.RideId = GetNewRideId();
-            Rides.Add(ride);
+            _rides.Add(ride);
         }
 
-        public List<DbTaxi> GetAllTaxis() => Taxis;
+        private const int StartingRideId = 1;
+        private int GetNewRideId() => _rides.Any() ? _rides.Max(r => r.RideId) + 1 : StartingRideId;
 
-        public DbTaxi GetTaxi(int id) => Taxis.First(t => t.TaxiDriverId == id);
+        public List<DbTaxi> GetAllTaxis() => _taxis;
+
+        public DbTaxi GetTaxi(int id) => _taxis.First(t => t.TaxiDriverId == id);
 
         public void SaveExistingTaxi(DbTaxi dbTaxi)
         {
