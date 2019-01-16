@@ -1,12 +1,11 @@
 ﻿using System;
 using TaxiDispatcher.Abstractions.Interfaces;
-using TaxiDispatcher.Client.Logging;
 
 namespace TaxiDispatcher.Tests.HelperClasses
 {
     public class TestLogger : ILogger
     {
-        public string AllMessages { get; set; }
+        public string AllMessages { get; private set; } = string.Empty;
 
         public void WriteLine(string message)
         {

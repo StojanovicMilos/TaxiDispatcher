@@ -5,7 +5,6 @@ using TaxiDispatcher.BL.Extensions;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Taxis;
-using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.BL
 {
