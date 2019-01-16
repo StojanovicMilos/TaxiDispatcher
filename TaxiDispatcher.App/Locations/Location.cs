@@ -27,6 +27,8 @@ namespace TaxiDispatcher.BL.Locations
 
         public int DistanceTo(Location otherLocation)
         {
+            if (otherLocation == null)
+                throw new ArgumentNullException(nameof(otherLocation));
             return Math.Abs(_coordinateX - otherLocation._coordinateX);
         }
 

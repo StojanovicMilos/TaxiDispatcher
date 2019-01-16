@@ -2,7 +2,7 @@
 
 namespace TaxiDispatcher.Client.Logging
 {
-    public class Logger : ILogger
+    public class ConsoleLogger : ILogger
     {
         public void WriteLine(string message)
         {

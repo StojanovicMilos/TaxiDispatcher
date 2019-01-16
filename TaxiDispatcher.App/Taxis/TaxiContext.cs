@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.DAL;
 using TaxiDispatcher.DAL.Entities;
@@ -14,7 +15,7 @@ namespace TaxiDispatcher.BL.Taxis
 
         public TaxiContext(IDatabase database)
         {
-            _database = database;
+            _database = database ?? throw new ArgumentNullException(nameof(database));
         }
 
         public TaxiDTO GetTaxiWithEarningsById(int id)
@@ -43,6 +44,7 @@ namespace TaxiDispatcher.BL.Taxis
 
         private static Taxi ConvertToTaxi(DbTaxi dbTaxi)
         {
+            if (dbTaxi == null) throw new ArgumentNullException(nameof(dbTaxi));
             switch (dbTaxi.TaxiCompany)
             {
                 case "Alfa":

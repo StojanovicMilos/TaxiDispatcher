@@ -24,7 +24,7 @@ namespace TaxiDispatcher.Client
 
         public TaxiDispatcherClient()
         {
-            _logger = new Logger();
+            _logger = new ConsoleLogger();
             _taxiContext = new TaxiContext();
             _scheduler = new Scheduler();
         }

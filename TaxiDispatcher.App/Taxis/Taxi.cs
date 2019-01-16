@@ -35,9 +35,18 @@ namespace TaxiDispatcher.BL.Taxis
             }
         }
 
-        public int CalculateInitialRidePrice(Location startLocation, Location destinationLocation) => startLocation.DistanceTo(destinationLocation) * PricePerDistance;
+        public int CalculateInitialRidePrice(Location startLocation, Location destinationLocation)
+        {
+            if (startLocation == null) throw new ArgumentNullException(nameof(startLocation));
+            if (destinationLocation == null) throw new ArgumentNullException(nameof(destinationLocation));
+            return startLocation.DistanceTo(destinationLocation) * PricePerDistance;
+        }
 
-        public int DistanceTo(Location startLocation) => startLocation.DistanceTo(_currentLocation);
+        public int DistanceTo(Location startLocation)
+        {
+            if (startLocation == null) throw new ArgumentNullException(nameof(startLocation));
+            return startLocation.DistanceTo(_currentLocation);
+        }
 
         public int CalculateTotalEarnings() => Rides.Sum(r => r.Price);
 
