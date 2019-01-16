@@ -1,4 +1,5 @@
 ﻿using System;
+using TaxiDispatcher.Abstractions.Interfaces;
 using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.BL.Extensions;
 using TaxiDispatcher.BL.Locations;
@@ -12,8 +13,6 @@ namespace TaxiDispatcher.BL
     {
         private readonly IDatabase _database;
         private readonly TaxiContext _taxiContext;
-
-        public Scheduler() : this(InMemoryDataBase.Instance) { }
 
         public Scheduler(IDatabase database)
         {

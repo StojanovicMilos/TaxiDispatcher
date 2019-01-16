@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TaxiDispatcher.DTO")]
+[assembly: AssemblyTitle("TaxiDispatcher.Abstractions")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TaxiDispatcher.DTO")]
+[assembly: AssemblyProduct("TaxiDispatcher.Abstractions")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3697a0aa-fe19-4952-a7a7-1df079ae2ce5")]
+[assembly: Guid("11ec4148-9494-46f4-9e8f-62154ae4ac10")]
 
 // Version information for an assembly consists of the following four values:
 //

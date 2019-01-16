@@ -1,5 +1,5 @@
 ﻿using System;
-using TaxiDispatcher.DAL.Entities;
+using TaxiDispatcher.Abstractions.DbDTO;
 
 namespace TaxiDispatcher.BL.Locations
 {
@@ -18,7 +18,7 @@ namespace TaxiDispatcher.BL.Locations
             _coordinateX = coordinateX;
         }
 
-        public Location(DbLocation dbLocation)
+        public Location(DbLocationDTO dbLocation)
         {
             if (dbLocation == null)
                 throw new ArgumentNullException(nameof(dbLocation));
@@ -37,9 +37,9 @@ namespace TaxiDispatcher.BL.Locations
             return _coordinateX.ToString();
         }
 
-        public DbLocation ToDbLocation()
+        public DbLocationDTO ToDbLocation()
         {
-            return new DbLocation {CoordinateX = _coordinateX};
+            return new DbLocationDTO {CoordinateX = _coordinateX};
         }
 
         public City City => _coordinateX < 11 ? City.City1 : City.City2;

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDispatcher.BL", "TaxiDispatcher.App\TaxiDispatcher.BL.csproj", "{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDispatcher.Client", "TaxiDispatcher.Client\TaxiDispatcher.Client.csproj", "{14F48E4D-4692-4C47-96CE-6F1B92E7F06A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51E17508-23C7-4CEC-9678-77A673CE00BD}"
@@ -16,7 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDispatcher.Tests", "Tax
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDispatcher.DAL", "TaxiDispatcher.DAL\TaxiDispatcher.DAL.csproj", "{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDispatcher.DTO", "TaxiDispatcher.DTO\TaxiDispatcher.DTO.csproj", "{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDispatcher.Abstractions", "TaxiDispatcher.Abstractions\TaxiDispatcher.Abstractions.csproj", "{11EC4148-9494-46F4-9E8F-62154AE4AC10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiDispatcher.BL", "TaxiDispatcher.BL\TaxiDispatcher.BL.csproj", "{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14F48E4D-4692-4C47-96CE-6F1B92E7F06A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14F48E4D-4692-4C47-96CE-6F1B92E7F06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F48E4D-4692-4C47-96CE-6F1B92E7F06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,10 +36,14 @@ Global
 		{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3697A0AA-FE19-4952-A7A7-1DF079AE2CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11EC4148-9494-46F4-9E8F-62154AE4AC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11EC4148-9494-46F4-9E8F-62154AE4AC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11EC4148-9494-46F4-9E8F-62154AE4AC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11EC4148-9494-46F4-9E8F-62154AE4AC10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

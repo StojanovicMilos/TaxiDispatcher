@@ -1,11 +1,12 @@
 ﻿using System;
+using TaxiDispatcher.Abstractions.Interfaces;
+using TaxiDispatcher.Abstractions.UIDTO;
 using TaxiDispatcher.BL;
 using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.Client.Logging;
-using TaxiDispatcher.DTO;
 
 namespace TaxiDispatcher.Client
 {
@@ -22,13 +23,6 @@ namespace TaxiDispatcher.Client
             new RideOrder(startLocation: new Location(35), destinationLocation: new Location(12), rideDateTime: new DateTime(2018, 1, 1, 11, 0, 0))
         };
 
-        public TaxiDispatcherClient()
-        {
-            _logger = new ConsoleLogger();
-            _taxiContext = new TaxiContext();
-            _scheduler = new Scheduler();
-        }
-
         public TaxiDispatcherClient(ILogger logger, Scheduler scheduler, TaxiContext taxiContext)
         {
             _logger = logger;
@@ -39,7 +33,7 @@ namespace TaxiDispatcher.Client
         public void Run()
         {
             PerformRides();
-            TaxiDTO taxiWithEarnings = GetTaxiWithEarningsById(2);
+            UITaxiDTO taxiWithEarnings = GetTaxiWithEarningsById(2);
             LogTaxiWithEarnings(taxiWithEarnings);
         }
 
@@ -67,9 +61,9 @@ namespace TaxiDispatcher.Client
             _logger.WriteLine("Ride accepted, waiting for driver: " + ride.RideTaxi.TaxiDriverName + Environment.NewLine);
         }
 
-        private TaxiDTO GetTaxiWithEarningsById(int id) => _taxiContext.GetTaxiWithEarningsById(id);
+        private UITaxiDTO GetTaxiWithEarningsById(int id) => _taxiContext.GetTaxiWithEarningsById(id);
 
-        private void LogTaxiWithEarnings(TaxiDTO taxiWithEarnings)
+        private void LogTaxiWithEarnings(UITaxiDTO taxiWithEarnings)
         {
             _logger.WriteLine($"Driver with ID = {taxiWithEarnings.TaxiDriverId} earned today:");
             foreach (var ride in taxiWithEarnings.Rides)

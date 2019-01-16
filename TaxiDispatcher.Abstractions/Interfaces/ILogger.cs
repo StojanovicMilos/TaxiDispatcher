@@ -1,4 +1,4 @@
-﻿namespace TaxiDispatcher.Client.Logging
+﻿namespace TaxiDispatcher.Abstractions.Interfaces
 {
     public interface ILogger
     {

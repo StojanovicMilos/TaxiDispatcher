@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TaxiDispatcher.Abstractions.DbDTO;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
-using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Taxis
 {
@@ -17,7 +17,7 @@ namespace TaxiDispatcher.BL.Taxis
         public string TaxiDriverName { get; }
         public List<Ride> Rides { get; } = new List<Ride>();
 
-        protected Taxi(DbTaxi dbTaxi)
+        protected Taxi(DbTaxiDTO dbTaxi)
         {
             if (dbTaxi == null)
                 throw new ArgumentNullException(nameof(dbTaxi));
@@ -58,11 +58,11 @@ namespace TaxiDispatcher.BL.Taxis
             _currentLocation = ride.DestinationLocation;
         }
 
-        public abstract DbTaxi ToDbTaxi();
+        public abstract DbTaxiDTO ToDbTaxi();
 
-        protected DbTaxi ToDbTaxiBase()
+        protected DbTaxiDTO ToDbTaxiBase()
         {
-            var dbTaxi = new DbTaxi
+            var dbTaxi = new DbTaxiDTO
             {
                 TaxiDriverId = TaxiDriverId,
                 TaxiDriverName = TaxiDriverName,

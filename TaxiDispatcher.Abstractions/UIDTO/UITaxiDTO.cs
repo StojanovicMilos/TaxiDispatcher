@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace TaxiDispatcher.DTO
+namespace TaxiDispatcher.Abstractions.UIDTO
 {
-    public class TaxiDTO
+    public class UITaxiDTO
     {
         public int TaxiDriverId { get; set; }
-        public List<RideDTO> Rides { get; set; } = new List<RideDTO>();
+        public List<UIRideDTO> Rides { get; set; } = new List<UIRideDTO>();
         public int TotalEarnings { get; set; }
     }
 }

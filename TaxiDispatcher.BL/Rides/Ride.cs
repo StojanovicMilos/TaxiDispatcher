@@ -1,7 +1,7 @@
 ﻿using System;
+using TaxiDispatcher.Abstractions.DbDTO;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Taxis;
-using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Rides
 {
@@ -27,10 +27,10 @@ namespace TaxiDispatcher.BL.Rides
             _rideId = rideId >= 0 ? rideId : throw new ArgumentException(nameof(rideId));
         }
 
-        public abstract DbRide ToDbRide(DbTaxi dbTaxi);
+        public abstract DbRideDTO ToDbRide(DbTaxiDTO dbTaxi);
 
-        protected DbRide ToDbRideBase(DbTaxi dbTaxi) =>
-            new DbRide
+        protected DbRideDTO ToDbRideBase(DbTaxiDTO dbTaxi) =>
+            new DbRideDTO
             {
                 RideId = _rideId,
                 StartLocation = _startLocation.ToDbLocation(),

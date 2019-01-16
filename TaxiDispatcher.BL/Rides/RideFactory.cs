@@ -1,7 +1,7 @@
 ﻿using System;
+using TaxiDispatcher.Abstractions.DbDTO;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Taxis;
-using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Rides
 {
@@ -25,7 +25,7 @@ namespace TaxiDispatcher.BL.Rides
             return new NightInterCityRide(startLocation, destinationLocation, rideDateTime, taxi, rideId);
         }
 
-        public static Ride CreateRide(DbRide dbRide, Taxi taxi)
+        public static Ride CreateRide(DbRideDTO dbRide, Taxi taxi)
         {
             bool dayRide = dbRide.RideDateTime.Hour >= 6 && dbRide.RideDateTime.Hour <= 22;
             bool cityRide = dbRide.RideType == (int)RideType.City;

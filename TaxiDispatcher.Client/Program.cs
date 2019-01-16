@@ -1,4 +1,9 @@
 ﻿using System;
+using TaxiDispatcher.Abstractions.Interfaces;
+using TaxiDispatcher.BL;
+using TaxiDispatcher.BL.Taxis;
+using TaxiDispatcher.Client.Logging;
+using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.Client
 {
@@ -6,7 +11,11 @@ namespace TaxiDispatcher.Client
     {
         static void Main()
         {
-            new TaxiDispatcherClient().Run();
+            var logger = new ConsoleLogger();
+            var taxiContext = new TaxiContext(InMemoryDataBase.Instance);
+            var scheduler = new Scheduler(InMemoryDataBase.Instance);
+
+            new TaxiDispatcherClient(logger, scheduler, taxiContext).Run();
             Console.ReadLine();
         }
     }

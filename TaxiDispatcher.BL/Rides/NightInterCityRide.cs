@@ -1,7 +1,7 @@
 ﻿using System;
+using TaxiDispatcher.Abstractions.DbDTO;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Taxis;
-using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.BL.Rides
 {
@@ -14,9 +14,9 @@ namespace TaxiDispatcher.BL.Rides
         {
         }
 
-        public override DbRide ToDbRide(DbTaxi dbTaxi)
+        public override DbRideDTO ToDbRide(DbTaxiDTO dbTaxi)
         {
-            DbRide dbRide = ToDbRideBase(dbTaxi);
+            DbRideDTO dbRide = ToDbRideBase(dbTaxi);
             dbRide.RideType = (int)RideType.InterCity;
             return dbRide;
         }

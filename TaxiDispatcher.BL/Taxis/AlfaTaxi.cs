@@ -1,16 +1,16 @@
-﻿using TaxiDispatcher.DAL.Entities;
+﻿using TaxiDispatcher.Abstractions.DbDTO;
 
 namespace TaxiDispatcher.BL.Taxis
 {
     public class AlfaTaxi : Taxi
     {
-        public AlfaTaxi(DbTaxi dbTaxi) : base(dbTaxi) { }
+        public AlfaTaxi(DbTaxiDTO dbTaxi) : base(dbTaxi) { }
 
         protected override int PricePerDistance => 15;
 
-        public override DbTaxi ToDbTaxi()
+        public override DbTaxiDTO ToDbTaxi()
         {
-            DbTaxi dbTaxi = ToDbTaxiBase();
+            DbTaxiDTO dbTaxi = ToDbTaxiBase();
             dbTaxi.TaxiCompany = "Alfa";
             return dbTaxi;
         }

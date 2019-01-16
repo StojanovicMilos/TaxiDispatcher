@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaxiDispatcher.Abstractions.DbDTO;
+using TaxiDispatcher.Abstractions.Interfaces;
+using TaxiDispatcher.Abstractions.UIDTO;
 using TaxiDispatcher.BL.CustomExceptions;
-using TaxiDispatcher.DAL;
-using TaxiDispatcher.DAL.Entities;
-using TaxiDispatcher.DTO;
 
 namespace TaxiDispatcher.BL.Taxis
 {
@@ -11,24 +11,22 @@ namespace TaxiDispatcher.BL.Taxis
     {
         private readonly IDatabase _database;
 
-        public TaxiContext() : this(InMemoryDataBase.Instance) { }
-
         public TaxiContext(IDatabase database)
         {
             _database = database ?? throw new ArgumentNullException(nameof(database));
         }
 
-        public TaxiDTO GetTaxiWithEarningsById(int id)
+        public UITaxiDTO GetTaxiWithEarningsById(int id)
         {
             Taxi taxi = GetTaxiById(id);
             int totalEarnings = taxi.CalculateTotalEarnings();
-            List<RideDTO> rides = new List<RideDTO>();
+            List<UIRideDTO> rides = new List<UIRideDTO>();
             foreach (var ride in taxi.Rides)
             {
-                rides.Add(new RideDTO { Price = ride.Price });
+                rides.Add(new UIRideDTO { Price = ride.Price });
             }
 
-            return new TaxiDTO
+            return new UITaxiDTO
             {
                 TaxiDriverId = id,
                 TotalEarnings = totalEarnings,
@@ -42,7 +40,7 @@ namespace TaxiDispatcher.BL.Taxis
             return ConvertToTaxi(dbTaxi);
         }
 
-        private static Taxi ConvertToTaxi(DbTaxi dbTaxi)
+        private static Taxi ConvertToTaxi(DbTaxiDTO dbTaxi)
         {
             if (dbTaxi == null) throw new ArgumentNullException(nameof(dbTaxi));
             switch (dbTaxi.TaxiCompany)
