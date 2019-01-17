@@ -1,7 +1,7 @@
 ﻿using System;
-using TaxiDispatcher.Abstractions.Interfaces;
 using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.BL.Extensions;
+using TaxiDispatcher.BL.Interfaces;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Taxis;
@@ -32,20 +32,20 @@ namespace TaxiDispatcher.BL
         {
             if (startLocation == null) throw new ArgumentNullException(nameof(startLocation));
             var allTaxis = _taxiContext.GetAllTaxis();
-            Taxi closestTaxi = allTaxis.WithMinimum(t => t.DistanceTo(startLocation));
+            var closestTaxi = allTaxis.WithMinimum(t => t.DistanceTo(startLocation));
             if (closestTaxi.DistanceTo(startLocation) > MaximumOrderDistance)
                 throw new NoAvailableTaxiVehiclesException();
             return closestTaxi;
         }
 
-        public void AcceptRide(Ride ride)
+        public Taxi AcceptRide(Ride ride)
         {
             if (ride == null) throw new ArgumentNullException(nameof(ride));
-            Taxi rideTaxi = ride.RideTaxi;
+            var rideTaxi = ride.RideTaxi;
             rideTaxi.AcceptRide(ride);
-            var dbTaxi = rideTaxi.ToDbTaxi();
-            _database.SaveExistingTaxi(dbTaxi);
-            _database.SaveRide(ride.ToDbRide(dbTaxi));
+            _database.SaveExistingTaxi(rideTaxi);
+            _database.SaveRide(ride);
+            return rideTaxi;
         }
     }
 }

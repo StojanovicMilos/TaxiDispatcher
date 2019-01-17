@@ -1,18 +1,14 @@
-﻿using TaxiDispatcher.Abstractions.DbDTO;
+﻿using System.Collections.Generic;
+using TaxiDispatcher.BL.Locations;
+using TaxiDispatcher.BL.Rides;
 
 namespace TaxiDispatcher.BL.Taxis
 {
     public class GoldTaxi : Taxi
     {
-        public GoldTaxi(DbTaxiDTO dbTaxi) : base(dbTaxi) { }
+        public GoldTaxi(int id, string name, Location current, List<Ride> rides) : base(id, name, current, rides) { }
 
         protected override int PricePerDistance => 13;
-
-        public override DbTaxiDTO ToDbTaxi()
-        {
-            DbTaxiDTO dbTaxi = ToDbTaxiBase();
-            dbTaxi.TaxiCompany = "Gold";
-            return dbTaxi;
-        }
+        public override string TaxiCompany { get; } = "Gold";
     }
 }

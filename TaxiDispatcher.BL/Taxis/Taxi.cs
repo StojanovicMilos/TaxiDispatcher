@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TaxiDispatcher.Abstractions.DbDTO;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
 
@@ -9,30 +8,21 @@ namespace TaxiDispatcher.BL.Taxis
 {
     public abstract class Taxi
     {
-        private Location _currentLocation;
+        public Location CurrentLocation { get; private set; }
         
         protected abstract int PricePerDistance { get; }
+        public abstract string TaxiCompany { get; }
 
         public int TaxiDriverId { get; }
         public string TaxiDriverName { get; }
-        public List<Ride> Rides { get; } = new List<Ride>();
+        public List<Ride> Rides { get; }
 
-        protected Taxi(DbTaxiDTO dbTaxi)
+        protected Taxi(int id, string name, Location current, List<Ride> rides)
         {
-            if (dbTaxi == null)
-                throw new ArgumentNullException(nameof(dbTaxi));
-            if (dbTaxi.CurrentLocation == null)
-                throw new ArgumentNullException(nameof(dbTaxi.CurrentLocation));
-
-            TaxiDriverId = dbTaxi.TaxiDriverId;
-            TaxiDriverName = dbTaxi.TaxiDriverName;
-            _currentLocation = new Location(dbTaxi.CurrentLocation);
-            foreach (var dbRide in dbTaxi.DbRides)
-            {
-                if (dbRide == null)
-                    throw new ArgumentNullException(nameof(dbRide));
-                Rides.Add(RideFactory.CreateRide(dbRide, this));
-            }
+            TaxiDriverId = id;
+            TaxiDriverName = name;
+            CurrentLocation = current;
+            Rides = rides;
         }
 
         public int CalculateInitialRidePrice(Location startLocation, Location destinationLocation)
@@ -45,7 +35,7 @@ namespace TaxiDispatcher.BL.Taxis
         public int DistanceTo(Location startLocation)
         {
             if (startLocation == null) throw new ArgumentNullException(nameof(startLocation));
-            return startLocation.DistanceTo(_currentLocation);
+            return startLocation.DistanceTo(CurrentLocation);
         }
 
         public int CalculateTotalEarnings() => Rides.Sum(r => r.Price);
@@ -55,24 +45,7 @@ namespace TaxiDispatcher.BL.Taxis
             if (ride == null)
                 throw new ArgumentNullException(nameof(ride));
             Rides.Add(ride);
-            _currentLocation = ride.DestinationLocation;
-        }
-
-        public abstract DbTaxiDTO ToDbTaxi();
-
-        protected DbTaxiDTO ToDbTaxiBase()
-        {
-            var dbTaxi = new DbTaxiDTO
-            {
-                TaxiDriverId = TaxiDriverId,
-                TaxiDriverName = TaxiDriverName,
-                CurrentLocation = _currentLocation.ToDbLocation()
-            };
-            foreach (var ride in Rides)
-            {
-                dbTaxi.DbRides.Add(ride.ToDbRide(dbTaxi));
-            }
-            return dbTaxi;
+            CurrentLocation = ride.DestinationLocation;
         }
     }
 }

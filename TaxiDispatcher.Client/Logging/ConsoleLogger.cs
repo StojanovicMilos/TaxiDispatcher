@@ -1,5 +1,4 @@
 ﻿using System;
-using TaxiDispatcher.Abstractions.Interfaces;
 
 namespace TaxiDispatcher.Client.Logging
 {
@@ -7,6 +6,7 @@ namespace TaxiDispatcher.Client.Logging
     {
         public void WriteLine(string message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
             Console.WriteLine(message);
         }
     }

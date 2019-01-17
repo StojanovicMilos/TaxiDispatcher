@@ -1,43 +1,48 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TaxiDispatcher.Abstractions.DbDTO;
-using TaxiDispatcher.Abstractions.Interfaces;
+using TaxiDispatcher.BL.Interfaces;
+using TaxiDispatcher.BL.Rides;
+using TaxiDispatcher.BL.Taxis;
+using TaxiDispatcher.DAL.Entities;
 
 namespace TaxiDispatcher.Tests.HelperClasses
 {
     public class TestDatabase : IDatabase
     {
-        private readonly List<DbTaxiDTO> _taxis = new List<DbTaxiDTO> {
-            new DbTaxiDTO { TaxiDriverId = 1, TaxiDriverName = "Predrag", CurrentLocation = new DbLocationDTO { CoordinateX = 1 }, TaxiCompany = "Naxi" },
-            new DbTaxiDTO { TaxiDriverId = 2, TaxiDriverName = "Nenad", CurrentLocation = new DbLocationDTO { CoordinateX = 4 }, TaxiCompany = "Naxi"  },
-            new DbTaxiDTO { TaxiDriverId = 3, TaxiDriverName = "Dragan", CurrentLocation = new DbLocationDTO { CoordinateX = 6 }, TaxiCompany = "Alfa"  },
-            new DbTaxiDTO { TaxiDriverId = 4, TaxiDriverName = "Goran", CurrentLocation = new DbLocationDTO { CoordinateX = 7 }, TaxiCompany = "Gold"  }
+        private readonly List<DbTaxi> _taxis = new List<DbTaxi>
+        {
+            new DbTaxi(taxiDriverId: 1, taxiDriverName: "Predrag", currentLocation: new DbLocation(1), taxiCompany: "Naxi"),
+            new DbTaxi(taxiDriverId: 2, taxiDriverName: "Nenad", currentLocation: new DbLocation(4), taxiCompany: "Naxi"),
+            new DbTaxi(taxiDriverId: 3, taxiDriverName: "Dragan", currentLocation: new DbLocation(6), taxiCompany: "Alfa"),
+            new DbTaxi(taxiDriverId: 4, taxiDriverName: "Goran", currentLocation: new DbLocation(7), taxiCompany: "Gold")
         };
 
-        private readonly List<DbRideDTO> _rides = new List<DbRideDTO>();
-        public void SaveRide(DbRideDTO ride)
-        {
-            ride.RideId = GetNewRideId();
-            _rides.Add(ride);
-        }
+        private readonly List<DbRide> _rides = new List<DbRide>();
 
         private const int StartingRideId = 1;
         private int GetNewRideId() => _rides.Any() ? _rides.Max(r => r.RideId) + 1 : StartingRideId;
 
-        public List<DbTaxiDTO> GetAllTaxis() => _taxis;
-
-        public DbTaxiDTO GetTaxi(int id) => _taxis.First(t => t.TaxiDriverId == id);
-
-        public void SaveExistingTaxi(DbTaxiDTO dbTaxi)
+        public void SaveRide(Ride ride)
         {
-            var taxiInDb = GetTaxi(dbTaxi.TaxiDriverId);
+            int newId = GetNewRideId();
+            DbTaxi rideTaxi = _taxis.First(t => t.TaxiDriverId == ride.RideTaxi.TaxiDriverId);
+            _rides.Add(new DbRide(newId, ride, rideTaxi));
+        }
+
+        public List<Taxi> GetAllTaxis() => _taxis.Select(t => t.ToDomain()).ToList();
+
+        public Taxi GetTaxi(int id) => _taxis.First(t => t.TaxiDriverId == id).ToDomain();
+
+        public void SaveExistingTaxi(Taxi dbTaxi)
+        {
+            var taxiInDb = _taxis.First(t => t.TaxiDriverId == dbTaxi.TaxiDriverId);
             taxiInDb.TaxiDriverName = dbTaxi.TaxiDriverName;
-            taxiInDb.CurrentLocation = dbTaxi.CurrentLocation;
+            taxiInDb.CurrentLocation = new DbLocation(dbTaxi.CurrentLocation);
             taxiInDb.TaxiCompany = dbTaxi.TaxiCompany;
-            taxiInDb.DbRides = new List<DbRideDTO>();
-            foreach (var dbRide in dbTaxi.DbRides)
+            taxiInDb.DbRides = new List<DbRide>();
+            foreach (var ride in dbTaxi.Rides)
             {
-                taxiInDb.DbRides.Add(dbRide);
+                taxiInDb.DbRides.Add(new DbRide(ride.RideId, ride, taxiInDb));
             }
         }
     }

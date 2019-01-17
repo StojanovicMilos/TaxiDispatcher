@@ -41,14 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbDTO\DbLocationDTO.cs" />
-    <Compile Include="DbDTO\DbRideDTO.cs" />
-    <Compile Include="DbDTO\DbTaxiDTO.cs" />
-    <Compile Include="Interfaces\IDatabase.cs" />
-    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIDTO\UIRideDTO.cs" />
-    <Compile Include="UIDTO\UITaxiDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaxiDispatcher.BL\TaxiDispatcher.BL.csproj">
+      <Project>{7c6332f4-4739-4f10-aa74-d5c4a9c342f4}</Project>
+      <Name>TaxiDispatcher.BL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

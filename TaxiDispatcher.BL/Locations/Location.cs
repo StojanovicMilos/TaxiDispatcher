@@ -1,5 +1,4 @@
 ﻿using System;
-using TaxiDispatcher.Abstractions.DbDTO;
 
 namespace TaxiDispatcher.BL.Locations
 {
@@ -11,38 +10,26 @@ namespace TaxiDispatcher.BL.Locations
 
     public class Location
     {
-        private readonly int _coordinateX;
+        public int CoordinateX { get; }
 
         public Location(int coordinateX)
         {
-            _coordinateX = coordinateX;
-        }
-
-        public Location(DbLocationDTO dbLocation)
-        {
-            if (dbLocation == null)
-                throw new ArgumentNullException(nameof(dbLocation));
-            _coordinateX = dbLocation.CoordinateX;
+            CoordinateX = coordinateX;
         }
 
         public int DistanceTo(Location otherLocation)
         {
             if (otherLocation == null)
                 throw new ArgumentNullException(nameof(otherLocation));
-            return Math.Abs(_coordinateX - otherLocation._coordinateX);
+            return Math.Abs(CoordinateX - otherLocation.CoordinateX);
         }
 
         public override string ToString()
         {
-            return _coordinateX.ToString();
+            return CoordinateX.ToString();
         }
 
-        public DbLocationDTO ToDbLocation()
-        {
-            return new DbLocationDTO {CoordinateX = _coordinateX};
-        }
-
-        public City City => _coordinateX < 11 ? City.City1 : City.City2;
+        public City City => CoordinateX < 11 ? City.City1 : City.City2;
 
     }
 }

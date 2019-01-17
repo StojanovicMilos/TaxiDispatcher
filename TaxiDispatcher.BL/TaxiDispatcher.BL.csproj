@@ -44,6 +44,7 @@
     <Compile Include="CustomExceptions\InvalidTaxiCompanyException.cs" />
     <Compile Include="CustomExceptions\NoAvailableTaxiVehiclesException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Locations\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rides\RideFactory.cs" />
@@ -59,16 +60,6 @@
     <Compile Include="Taxis\GoldTaxi.cs" />
     <Compile Include="Taxis\NaxiTaxi.cs" />
     <Compile Include="Taxis\Taxi.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TaxiDispatcher.Abstractions\TaxiDispatcher.Abstractions.csproj">
-      <Project>{11EC4148-9494-46F4-9E8F-62154AE4AC10}</Project>
-      <Name>TaxiDispatcher.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TaxiDispatcher.DAL\TaxiDispatcher.DAL.csproj">
-      <Project>{eeaadf97-0a13-4d2d-8ce7-e81aab9762c4}</Project>
-      <Name>TaxiDispatcher.DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
