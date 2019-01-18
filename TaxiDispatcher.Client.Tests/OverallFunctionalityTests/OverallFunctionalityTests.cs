@@ -17,7 +17,7 @@ namespace TaxiDispatcher.Tests.OverallFunctionalityTests
             TestDatabase testDatabase = new TestDatabase();
             Scheduler testDatabaseScheduler = new Scheduler(testDatabase);
             TaxiContext testDatabaseTaxiContext = new TaxiContext(testDatabase);
-            TaxiDispatcherClient taxiDispatcherClient = new TaxiDispatcherClient(logger, testDatabaseScheduler, testDatabaseTaxiContext);
+            Program.ConfigureClient(logger, testDatabaseScheduler, testDatabaseTaxiContext);
             string expectedMessages = "Ordering ride from 5 to 0..." + Environment.NewLine + "Ride ordered, price: 100" + Environment.NewLine + 
                                       "Ride accepted, waiting for driver: Nenad" + Environment.NewLine + Environment.NewLine + 
                                       "Ordering ride from 0 to 12..." + Environment.NewLine + "Ride ordered, price: 240" + Environment.NewLine + 
@@ -28,8 +28,9 @@ namespace TaxiDispatcher.Tests.OverallFunctionalityTests
                                       "There are no available taxi vehicles!" + Environment.NewLine + Environment.NewLine + 
                                       "Driver with ID = 2 earned today:" + Environment.NewLine + "Price: 100" + Environment.NewLine + "Price: 240" + 
                                       Environment.NewLine + "Total: 340" + Environment.NewLine;
+
             //act
-            taxiDispatcherClient.Run();
+            Program.RunClient();
 
             //assert
             Assert.Equal(expectedMessages, logger.AllMessages);

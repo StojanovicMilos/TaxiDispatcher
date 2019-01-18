@@ -47,7 +47,6 @@
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxiDispatcherClient.cs" />
     <Compile Include="UIDTO\UIRideDTO.cs" />
     <Compile Include="UIDTO\UITaxiDTO.cs" />
   </ItemGroup>
