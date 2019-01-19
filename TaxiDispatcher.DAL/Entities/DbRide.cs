@@ -13,7 +13,7 @@ namespace TaxiDispatcher.DAL.Entities
         private int Price { get; }
         private DateTime RideDateTime { get; }
 
-        public Ride ToDomain(Taxi taxi) => new Ride(StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, RideId, Price);
+        public Ride ToDomain(Taxi taxi) => new Ride(RideId, StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, Price);
 
         public DbRide(int rideId, Ride ride, DbTaxi dbTaxi)
         {
