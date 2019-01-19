@@ -10,7 +10,7 @@ namespace TaxiDispatcher.DAL.Entities
         public int TaxiId { get; }
         public string DriverName { get; set; }
         public DbLocation CurrentLocation { get; set; }
-        public List<DbRide> DbRides { get; set; }
+        public List<DbRide> Rides { get; set; }
         public string TaxiCompanyName { get; set; }
 
         public DbTaxi(int taxiId, string taxiDriverName, DbLocation currentLocation, string taxiCompanyName)
@@ -18,7 +18,7 @@ namespace TaxiDispatcher.DAL.Entities
             TaxiId = taxiId;
             DriverName = taxiDriverName;
             CurrentLocation = currentLocation;
-            DbRides = new List<DbRide>();
+            Rides = new List<DbRide>();
             TaxiCompanyName = taxiCompanyName;
         }
 
@@ -27,7 +27,7 @@ namespace TaxiDispatcher.DAL.Entities
             TaxiId = taxi.TaxiId;
             DriverName = taxi.DriverName;
             CurrentLocation = new DbLocation(taxi.CurrentLocation);
-            DbRides = new List<DbRide>(taxi.Rides.Select(r => new DbRide(r.RideId, r, this)));
+            Rides = new List<DbRide>(taxi.Rides.Select(r => new DbRide(r.RideId, r)));
             TaxiCompanyName = taxi.TaxiCompany.Name;
         }
 
@@ -35,7 +35,7 @@ namespace TaxiDispatcher.DAL.Entities
         {
             Taxi taxi = new Taxi(TaxiId, DriverName, CurrentLocation.ToDomain(), new List<Ride>(), TaxiCompanyName);
 
-            foreach (var dbRide in DbRides)
+            foreach (var dbRide in Rides)
             {
                 taxi.Rides.Add(dbRide.ToDomain(taxi));
             }

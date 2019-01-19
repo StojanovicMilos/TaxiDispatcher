@@ -25,8 +25,7 @@ namespace TaxiDispatcher.Tests.HelperClasses
         public void SaveRide(Ride ride)
         {
             int newId = GetNewRideId();
-            DbTaxi rideTaxi = _taxis.First(t => t.TaxiId == ride.RideTaxi.TaxiId);
-            _rides.Add(new DbRide(newId, ride, rideTaxi));
+            _rides.Add(new DbRide(newId, ride));
         }
 
         public List<Taxi> GetAllTaxis() => _taxis.Select(t => t.ToDomain()).ToList();
@@ -39,11 +38,7 @@ namespace TaxiDispatcher.Tests.HelperClasses
             taxiInDb.DriverName = dbTaxi.DriverName;
             taxiInDb.CurrentLocation = new DbLocation(dbTaxi.CurrentLocation);
             taxiInDb.TaxiCompanyName = dbTaxi.TaxiCompany.Name;
-            taxiInDb.DbRides = new List<DbRide>();
-            foreach (var ride in dbTaxi.Rides)
-            {
-                taxiInDb.DbRides.Add(new DbRide(ride.RideId, ride, taxiInDb));
-            }
+            taxiInDb.Rides = new List<DbRide>(dbTaxi.Rides.Select(r => new DbRide(r.RideId, r)));
         }
     }
 }
