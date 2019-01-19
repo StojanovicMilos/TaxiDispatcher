@@ -12,21 +12,8 @@ namespace TaxiDispatcher.DAL.Entities
         private DbTaxi RideTaxi { get; }
         private int Price { get; }
         private DateTime RideDateTime { get; }
-        private int RideType { get; }
 
-        public Ride ToDomain(Taxi taxi)
-        {
-            bool dayRide = RideDateTime.Hour >= 6 && RideDateTime.Hour <= 22;
-            bool cityRide = RideType == (int) BL.Rides.RideType.City;
-
-            if (dayRide && cityRide)
-                return new DayCityRide(StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, RideId);
-            if (dayRide && !cityRide)
-                return new DayInterCityRide(StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, RideId);
-            if (!dayRide && cityRide)
-                return new NightCityRide(StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, RideId);
-            return new NightInterCityRide(StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, RideId);
-        }
+        public Ride ToDomain(Taxi taxi) => new Ride(StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, RideId, Price);
 
         public DbRide(int rideId, Ride ride, DbTaxi dbTaxi)
         {
@@ -36,7 +23,6 @@ namespace TaxiDispatcher.DAL.Entities
             RideTaxi = dbTaxi;
             Price = ride.Price;
             RideDateTime = ride.RideDateTime;
-            RideType = ride.RideType;
         }
     }
 }

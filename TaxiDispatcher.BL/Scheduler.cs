@@ -23,7 +23,7 @@ namespace TaxiDispatcher.BL
         {
             if (rideOrder == null) throw new ArgumentNullException(nameof(rideOrder));
             Taxi closestTaxi = FindClosestTaxi(rideOrder.StartLocation);
-            return RideFactory.CreateRide(rideOrder, closestTaxi);
+            return new Ride(rideOrder, closestTaxi);
         }
 
         private const int MaximumOrderDistance = 15;
