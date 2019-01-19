@@ -17,6 +17,11 @@ namespace TaxiDispatcher.BL.Locations
             CoordinateX = coordinateX;
         }
 
+        public Location(Location otherLocation)
+        {
+            CoordinateX = otherLocation.CoordinateX;
+        }
+
         public int DistanceTo(Location otherLocation)
         {
             if (otherLocation == null)

@@ -12,10 +12,10 @@ namespace TaxiDispatcher.DAL
     {
         private static readonly List<DbTaxi> Taxis = new List<DbTaxi>
         {
-            new DbTaxi(taxiDriverId: 1, taxiDriverName: "Predrag", currentLocation: new DbLocation(1), taxiCompany: "Naxi"),
-            new DbTaxi(taxiDriverId: 2, taxiDriverName: "Nenad", currentLocation: new DbLocation(4), taxiCompany: "Naxi"),
-            new DbTaxi(taxiDriverId: 3, taxiDriverName: "Dragan", currentLocation: new DbLocation(6), taxiCompany: "Alfa"),
-            new DbTaxi(taxiDriverId: 4, taxiDriverName: "Goran", currentLocation: new DbLocation(7), taxiCompany: "Gold")
+            new DbTaxi(taxiId: 1, taxiDriverName: "Predrag", currentLocation: new DbLocation(1), taxiCompanyName: "Naxi"),
+            new DbTaxi(taxiId: 2, taxiDriverName: "Nenad", currentLocation: new DbLocation(4), taxiCompanyName: "Naxi"),
+            new DbTaxi(taxiId: 3, taxiDriverName: "Dragan", currentLocation: new DbLocation(6), taxiCompanyName: "Alfa"),
+            new DbTaxi(taxiId: 4, taxiDriverName: "Goran", currentLocation: new DbLocation(7), taxiCompanyName: "Gold")
         };
 
         private static readonly List<DbRide> Rides = new List<DbRide>();
@@ -32,20 +32,20 @@ namespace TaxiDispatcher.DAL
         public void SaveRide(Ride ride)
         {
             int newId = GetNewRideId();
-            DbTaxi rideTaxi = Taxis.First(t => t.TaxiDriverId == ride.RideTaxi.TaxiDriverId);
+            DbTaxi rideTaxi = Taxis.First(t => t.TaxiId == ride.RideTaxi.TaxiId);
             Rides.Add(new DbRide(newId, ride, rideTaxi));
         }
 
         public List<Taxi> GetAllTaxis() => Taxis.Select(t => t.ToDomain()).ToList();
 
-        public Taxi GetTaxi(int id) => Taxis.First(t => t.TaxiDriverId == id).ToDomain();
+        public Taxi GetTaxi(int id) => Taxis.First(t => t.TaxiId == id).ToDomain();
 
         public void SaveExistingTaxi(Taxi dbTaxi)
         {
-            var taxiInDb = Taxis.First(t => t.TaxiDriverId == dbTaxi.TaxiDriverId);
-            taxiInDb.TaxiDriverName = dbTaxi.TaxiDriverName;
+            var taxiInDb = Taxis.First(t => t.TaxiId == dbTaxi.TaxiId);
+            taxiInDb.DriverName = dbTaxi.DriverName;
             taxiInDb.CurrentLocation = new DbLocation(dbTaxi.CurrentLocation);
-            taxiInDb.TaxiCompany = dbTaxi.TaxiCompany;
+            taxiInDb.TaxiCompanyName = dbTaxi.TaxiCompany.Name;
             taxiInDb.DbRides = new List<DbRide>();
             foreach (var ride in dbTaxi.Rides)
             {

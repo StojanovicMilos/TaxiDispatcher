@@ -50,10 +50,8 @@
     <Compile Include="Rides\RideOrder.cs" />
     <Compile Include="Rides\Ride.cs" />
     <Compile Include="Scheduler.cs" />
+    <Compile Include="Taxis\TaxiCompany.cs" />
     <Compile Include="Taxis\TaxiContext.cs" />
-    <Compile Include="Taxis\AlfaTaxi.cs" />
-    <Compile Include="Taxis\GoldTaxi.cs" />
-    <Compile Include="Taxis\NaxiTaxi.cs" />
     <Compile Include="Taxis\Taxi.cs" />
   </ItemGroup>
   <ItemGroup />

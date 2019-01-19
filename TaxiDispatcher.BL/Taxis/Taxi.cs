@@ -6,30 +6,28 @@ using TaxiDispatcher.BL.Rides;
 
 namespace TaxiDispatcher.BL.Taxis
 {
-    public abstract class Taxi
+    public class Taxi
     {
+        public int TaxiId { get; }
+        public string DriverName { get; }
         public Location CurrentLocation { get; private set; }
-        
-        protected abstract int PricePerDistance { get; }
-        public abstract string TaxiCompany { get; }
-
-        public int TaxiDriverId { get; }
-        public string TaxiDriverName { get; }
         public List<Ride> Rides { get; }
+        public TaxiCompany TaxiCompany { get; }
 
-        protected Taxi(int id, string name, Location current, List<Ride> rides)
+        public Taxi(int id, string taxiDriverName, Location currentLocation, List<Ride> rides, string taxiCompanyName)
         {
-            TaxiDriverId = id;
-            TaxiDriverName = name;
-            CurrentLocation = current;
-            Rides = rides;
+            TaxiId = id >= 0 ? id : throw new ArgumentException(nameof(id));
+            DriverName = taxiDriverName ?? throw new ArgumentNullException(nameof(taxiDriverName));
+            CurrentLocation = currentLocation ?? throw new ArgumentNullException(nameof(currentLocation));
+            Rides = rides ?? throw new ArgumentNullException(nameof(rides));
+            TaxiCompany = new TaxiCompany(taxiCompanyName);
         }
 
         public int CalculateInitialRidePrice(Location startLocation, Location destinationLocation)
         {
             if (startLocation == null) throw new ArgumentNullException(nameof(startLocation));
             if (destinationLocation == null) throw new ArgumentNullException(nameof(destinationLocation));
-            return startLocation.DistanceTo(destinationLocation) * PricePerDistance;
+            return startLocation.DistanceTo(destinationLocation) * TaxiCompany.PricePerDistance;
         }
 
         public int DistanceTo(Location startLocation)
@@ -45,7 +43,7 @@ namespace TaxiDispatcher.BL.Taxis
             if (ride == null)
                 throw new ArgumentNullException(nameof(ride));
             Rides.Add(ride);
-            CurrentLocation = ride.DestinationLocation;
+            CurrentLocation = new Location(ride.DestinationLocation);
         }
     }
 }

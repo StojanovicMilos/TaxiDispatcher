@@ -13,7 +13,7 @@ namespace TaxiDispatcher.Tests.AppTests.SelectingClosestTaxi
         [MemberData(nameof(RideOrderSelectsClosestTaxiTestData.SelectingClosestTaxiRideOrdersUsedInClientTestData), MemberType = typeof(RideOrderSelectsClosestTaxiTestData))]
         [MemberData(nameof(RideOrderSelectsClosestTaxiTestData.SelectingClosestTaxiTestData), MemberType = typeof(RideOrderSelectsClosestTaxiTestData))]
         [MemberData(nameof(RideOrderSelectsClosestTaxiTestData.SelectingClosestTaxiTestDataEdgeCases), MemberType = typeof(RideOrderSelectsClosestTaxiTestData))]
-        public void GivenRideOrderSchedulerSelectsDriver(RideOrder rideOrder, int expectedDriverId)
+        public void GivenRideOrderSchedulerSelectsDriver(RideOrder rideOrder, int expectedTaxiId)
         {
             //Arrange
             Scheduler scheduler = new Scheduler(new TestDatabase());
@@ -23,7 +23,7 @@ namespace TaxiDispatcher.Tests.AppTests.SelectingClosestTaxi
             scheduler.AcceptRide(ride);
 
             //Assert
-            Assert.Equal(expectedDriverId, ride.RideTaxi.TaxiDriverId);
+            Assert.Equal(expectedTaxiId, ride.RideTaxi.TaxiId);
         }
 
         [Theory]

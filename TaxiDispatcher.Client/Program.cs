@@ -67,7 +67,7 @@ namespace TaxiDispatcher.Client
             var ride = _scheduler.OrderRide(rideOrder);
             _logger.WriteLine("Ride ordered, price: " + ride.Price);
             var taxi = _scheduler.AcceptRide(ride);
-            _logger.WriteLine("Ride accepted, waiting for driver: " + taxi.TaxiDriverName + Environment.NewLine);
+            _logger.WriteLine("Ride accepted, waiting for driver: " + taxi.DriverName + Environment.NewLine);
         }
 
         private static Taxi GetTaxiWithEarningsById(int id) => _taxiContext.GetTaxiWithEarningsById(id);
@@ -75,7 +75,7 @@ namespace TaxiDispatcher.Client
         private static void LogTaxiWithEarnings(UITaxiDTO taxiWithEarnings)
         {
             if (taxiWithEarnings == null) throw new ArgumentNullException(nameof(taxiWithEarnings));
-            _logger.WriteLine($"Driver with ID = {taxiWithEarnings.TaxiDriverId} earned today:");
+            _logger.WriteLine($"Driver with ID = {taxiWithEarnings.TaxiId} earned today:");
             foreach (var ride in taxiWithEarnings.Rides)
             {
                 _logger.WriteLine("Price: " + ride.Price);
