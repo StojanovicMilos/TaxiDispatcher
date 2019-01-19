@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TaxiDispatcher.BL.Interfaces;
 
 namespace TaxiDispatcher.BL.Taxis
@@ -14,7 +13,5 @@ namespace TaxiDispatcher.BL.Taxis
         }
 
         public Taxi GetTaxiWithEarningsById(int id) => _database.GetTaxi(id);
-
-        public List<Taxi> GetAllTaxis() => _database.GetAllTaxis();
     }
 }
