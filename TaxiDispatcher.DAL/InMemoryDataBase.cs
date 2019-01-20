@@ -29,7 +29,7 @@ namespace TaxiDispatcher.DAL
         private const int StartingRideId = 1;
         private int GetNewRideId() => Rides.Any() ? Rides.Max(r => r.RideId) + 1 : StartingRideId;
 
-        public void SaveRide(Ride ride)
+        public void SaveNewRide(Ride ride)
         {
             int newId = GetNewRideId();
             Rides.Add(new DbRide(newId, ride));

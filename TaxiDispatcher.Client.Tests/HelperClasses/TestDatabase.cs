@@ -22,7 +22,7 @@ namespace TaxiDispatcher.Tests.HelperClasses
         private const int StartingRideId = 1;
         private int GetNewRideId() => _rides.Any() ? _rides.Max(r => r.RideId) + 1 : StartingRideId;
 
-        public void SaveRide(Ride ride)
+        public void SaveNewRide(Ride ride)
         {
             int newId = GetNewRideId();
             _rides.Add(new DbRide(newId, ride));

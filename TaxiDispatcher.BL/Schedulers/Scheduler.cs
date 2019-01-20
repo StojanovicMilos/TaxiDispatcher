@@ -42,7 +42,7 @@ namespace TaxiDispatcher.BL.Schedulers
             var rideTaxi = ride.RideTaxi;
             rideTaxi.AcceptRide(ride);
             _database.SaveExistingTaxi(rideTaxi);
-            _database.SaveRide(ride);
+            _database.SaveNewRide(ride);
             return rideTaxi;
         }
     }
