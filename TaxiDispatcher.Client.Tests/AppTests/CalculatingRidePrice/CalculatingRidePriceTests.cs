@@ -1,5 +1,5 @@
-﻿using TaxiDispatcher.BL;
-using TaxiDispatcher.BL.Rides;
+﻿using TaxiDispatcher.BL.Rides;
+using TaxiDispatcher.BL.Schedulers;
 using TaxiDispatcher.Tests.HelperClasses;
 using Xunit;
 

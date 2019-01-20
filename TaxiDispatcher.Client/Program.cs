@@ -1,11 +1,11 @@
 ﻿using System;
-using TaxiDispatcher.BL;
 using TaxiDispatcher.BL.CustomExceptions;
+using TaxiDispatcher.BL.Interfaces;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
+using TaxiDispatcher.BL.Schedulers;
 using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.Client.Logging;
-using TaxiDispatcher.Client.UIDTO;
 using TaxiDispatcher.DAL;
 
 namespace TaxiDispatcher.Client
@@ -13,8 +13,8 @@ namespace TaxiDispatcher.Client
     public class Program
     {
         private static ILogger _logger;
-        private static TaxiContext _taxiContext;
-        private static Scheduler _scheduler;
+        private static TaxiEarningsLogger _taxiEarningsLogger;
+        private static IScheduler _scheduler;
 
         private static readonly RideOrder[] RideOrders =
         {
@@ -26,23 +26,26 @@ namespace TaxiDispatcher.Client
 
         static void Main()
         {
-            ConfigureClient(new ConsoleLogger(), new Scheduler(InMemoryDataBase.Instance), new TaxiContext(InMemoryDataBase.Instance));
+            ILogger logger = new ConsoleLogger();
+            IDatabase database = InMemoryDataBase.Instance;
+            IScheduler scheduler = new LoggingScheduler(logger, new Scheduler(database));
+            TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(database, logger);
+            ConfigureClient(logger, scheduler, taxiEarningsLogger);
             RunClient();
             Console.ReadLine();
         }
 
-        public static void ConfigureClient(ILogger logger, Scheduler scheduler, TaxiContext taxiContext)
+        public static void ConfigureClient(ILogger logger, IScheduler scheduler, TaxiEarningsLogger taxiEarningsLogger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _taxiContext = taxiContext ?? throw new ArgumentNullException(nameof(taxiContext));
+            _taxiEarningsLogger = taxiEarningsLogger ?? throw new ArgumentNullException(nameof(taxiEarningsLogger));
             _scheduler = scheduler ?? throw new ArgumentNullException(nameof(scheduler));
         }
 
         public static void RunClient()
         {
             PerformRides();
-            UITaxiDTO taxiWithEarnings = new UITaxiDTO(GetTaxiWithEarningsById(2));
-            LogTaxiWithEarnings(taxiWithEarnings);
+            LogTotalEarningsForTaxiWithId(2);
         }
 
         private static void PerformRides()
@@ -63,24 +66,10 @@ namespace TaxiDispatcher.Client
         private static void PerformRide(RideOrder rideOrder)
         {
             if (rideOrder == null) throw new ArgumentNullException(nameof(rideOrder));
-            _logger.WriteLine($"Ordering ride from {rideOrder.StartLocation} to {rideOrder.DestinationLocation}...");
             var ride = _scheduler.OrderRide(rideOrder);
-            _logger.WriteLine("Ride ordered, price: " + ride.Price);
-            var taxi = _scheduler.AcceptRide(ride);
-            _logger.WriteLine("Ride accepted, waiting for driver: " + taxi.DriverName + Environment.NewLine);
+            _scheduler.AcceptRide(ride);
         }
 
-        private static Taxi GetTaxiWithEarningsById(int id) => _taxiContext.GetTaxiWithEarningsById(id);
-
-        private static void LogTaxiWithEarnings(UITaxiDTO taxiWithEarnings)
-        {
-            if (taxiWithEarnings == null) throw new ArgumentNullException(nameof(taxiWithEarnings));
-            _logger.WriteLine($"Driver with ID = {taxiWithEarnings.TaxiId} earned today:");
-            foreach (var ride in taxiWithEarnings.Rides)
-            {
-                _logger.WriteLine("Price: " + ride.Price);
-            }
-            _logger.WriteLine("Total: " + taxiWithEarnings.TotalEarnings);
-        }
+        private static void LogTotalEarningsForTaxiWithId(int id) => _taxiEarningsLogger.LogTotalEarningsForTaxiWithId(id);
     }
 }

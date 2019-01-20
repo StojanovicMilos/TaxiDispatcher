@@ -45,13 +45,16 @@
     <Compile Include="CustomExceptions\NoAvailableTaxiVehiclesException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Interfaces\IDatabase.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Locations\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rides\RideOrder.cs" />
     <Compile Include="Rides\Ride.cs" />
-    <Compile Include="Scheduler.cs" />
+    <Compile Include="Interfaces\IScheduler.cs" />
+    <Compile Include="Schedulers\LoggingScheduler.cs" />
+    <Compile Include="Schedulers\Scheduler.cs" />
     <Compile Include="Taxis\TaxiCompany.cs" />
-    <Compile Include="Taxis\TaxiContext.cs" />
+    <Compile Include="Taxis\TaxiEarningsLogger.cs" />
     <Compile Include="Taxis\Taxi.cs" />
   </ItemGroup>
   <ItemGroup />

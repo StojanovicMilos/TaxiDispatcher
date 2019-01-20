@@ -1,5 +1,6 @@
 ﻿using System;
-using TaxiDispatcher.BL;
+using TaxiDispatcher.BL.Interfaces;
+using TaxiDispatcher.BL.Schedulers;
 using TaxiDispatcher.BL.Taxis;
 using TaxiDispatcher.Client;
 using TaxiDispatcher.Tests.HelperClasses;
@@ -15,9 +16,9 @@ namespace TaxiDispatcher.Tests.OverallFunctionalityTests
             //arrange
             TestLogger logger = new TestLogger();
             TestDatabase testDatabase = new TestDatabase();
-            Scheduler testDatabaseScheduler = new Scheduler(testDatabase);
-            TaxiContext testDatabaseTaxiContext = new TaxiContext(testDatabase);
-            Program.ConfigureClient(logger, testDatabaseScheduler, testDatabaseTaxiContext);
+            IScheduler testDatabaseScheduler = new LoggingScheduler(logger, new Scheduler(testDatabase));
+            TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(testDatabase, logger);
+            Program.ConfigureClient(logger, testDatabaseScheduler, taxiEarningsLogger);
             string expectedMessages = "Ordering ride from 5 to 0..." + Environment.NewLine + "Ride ordered, price: 100" + Environment.NewLine + 
                                       "Ride accepted, waiting for driver: Nenad" + Environment.NewLine + Environment.NewLine + 
                                       "Ordering ride from 0 to 12..." + Environment.NewLine + "Ride ordered, price: 240" + Environment.NewLine + 

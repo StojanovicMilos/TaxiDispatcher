@@ -1,4 +1,5 @@
 ﻿using System;
+using TaxiDispatcher.BL.Interfaces;
 
 namespace TaxiDispatcher.Client.Logging
 {

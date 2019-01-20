@@ -6,9 +6,9 @@ using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Taxis;
 
-namespace TaxiDispatcher.BL
+namespace TaxiDispatcher.BL.Schedulers
 {
-    public class Scheduler
+    public class Scheduler : IScheduler
     {
         private readonly IDatabase _database;
 
