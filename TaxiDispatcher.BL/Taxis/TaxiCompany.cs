@@ -1,4 +1,5 @@
-﻿using TaxiDispatcher.BL.CustomExceptions;
+﻿using System;
+using TaxiDispatcher.BL.CustomExceptions;
 
 namespace TaxiDispatcher.BL.Taxis
 {
@@ -9,7 +10,7 @@ namespace TaxiDispatcher.BL.Taxis
 
         public TaxiCompany(string taxiCompanyName)
         {
-            Name = taxiCompanyName;
+            Name = taxiCompanyName ?? throw new ArgumentNullException(nameof(taxiCompanyName));
 
             switch (taxiCompanyName)
             {

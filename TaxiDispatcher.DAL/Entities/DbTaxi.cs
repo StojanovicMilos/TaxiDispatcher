@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Taxis;
 
@@ -14,11 +15,11 @@ namespace TaxiDispatcher.DAL.Entities
 
         public DbTaxi(int taxiId, string taxiDriverName, DbLocation currentLocation, List<DbRide> rides, string taxiCompanyName)
         {
-            TaxiId = taxiId;
-            DriverName = taxiDriverName;
-            CurrentLocation = currentLocation;
-            Rides = rides;
-            TaxiCompanyName = taxiCompanyName;
+            TaxiId = taxiId >= 0 ? taxiId : throw new ArgumentException(nameof(taxiId));
+            DriverName = taxiDriverName ?? throw new ArgumentNullException(nameof(taxiDriverName));
+            CurrentLocation = currentLocation ?? throw new ArgumentNullException(nameof(currentLocation));
+            Rides = rides ?? throw new ArgumentNullException(nameof(rides));
+            TaxiCompanyName = taxiCompanyName ?? throw new ArgumentNullException(nameof(taxiCompanyName));
         }
 
         public Taxi ToDomain()

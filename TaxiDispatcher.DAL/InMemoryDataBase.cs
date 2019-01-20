@@ -31,16 +31,22 @@ namespace TaxiDispatcher.DAL
 
         public void SaveNewRide(Ride ride)
         {
+            if (ride == null) throw new ArgumentNullException(nameof(ride));
             int newId = GetNewRideId();
             Rides.Add(new DbRide(newId, ride));
         }
 
         public List<Taxi> GetAllTaxis() => Taxis.Select(t => t.ToDomain()).ToList();
 
-        public Taxi GetTaxi(int id) => Taxis.First(t => t.TaxiId == id).ToDomain();
+        public Taxi GetTaxi(int id)
+        {
+            if (id <= 0) throw new ArgumentException(nameof(id));
+            return Taxis.First(t => t.TaxiId == id).ToDomain();
+        }
 
         public void SaveExistingTaxi(Taxi dbTaxi)
         {
+            if (dbTaxi == null) throw new ArgumentNullException(nameof(dbTaxi));
             var taxiInDb = Taxis.First(t => t.TaxiId == dbTaxi.TaxiId);
             taxiInDb.DriverName = dbTaxi.DriverName;
             taxiInDb.CurrentLocation = new DbLocation(dbTaxi.CurrentLocation);

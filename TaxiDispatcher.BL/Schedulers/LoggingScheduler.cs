@@ -18,6 +18,7 @@ namespace TaxiDispatcher.BL.Schedulers
 
         public Ride OrderRide(RideOrder rideOrder)
         {
+            if (rideOrder == null) throw new ArgumentNullException(nameof(rideOrder));
             _logger.WriteLine($"Ordering ride from {rideOrder.StartLocation} to {rideOrder.DestinationLocation}...");
             var ride = _scheduler.OrderRide(rideOrder);
             _logger.WriteLine("Ride ordered, price: " + ride.Price);
@@ -26,6 +27,7 @@ namespace TaxiDispatcher.BL.Schedulers
 
         public Taxi AcceptRide(Ride ride)
         {
+            if (ride == null) throw new ArgumentNullException(nameof(ride));
             var taxi = _scheduler.AcceptRide(ride);
             _logger.WriteLine("Ride accepted, waiting for driver: " + taxi.DriverName + Environment.NewLine);
             return taxi;

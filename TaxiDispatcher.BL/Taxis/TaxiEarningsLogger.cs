@@ -16,6 +16,9 @@ namespace TaxiDispatcher.BL.Taxis
 
         public void LogTotalEarningsForTaxiWithId(int taxiId)
         {
+            if (taxiId < 0)
+                throw new ArgumentException(nameof(taxiId));
+
             Taxi taxi = _database.GetTaxi(taxiId);
 
             _logger.WriteLine($"Driver with ID = {taxi.TaxiId} earned today:");

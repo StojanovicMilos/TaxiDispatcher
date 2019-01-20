@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TaxiDispatcher.BL.Interfaces;
 using TaxiDispatcher.BL.Rides;
@@ -24,16 +25,22 @@ namespace TaxiDispatcher.Tests.HelperClasses
 
         public void SaveNewRide(Ride ride)
         {
+            if (ride == null) throw new ArgumentNullException(nameof(ride));
             int newId = GetNewRideId();
             _rides.Add(new DbRide(newId, ride));
         }
 
         public List<Taxi> GetAllTaxis() => _taxis.Select(t => t.ToDomain()).ToList();
 
-        public Taxi GetTaxi(int id) => _taxis.First(t => t.TaxiId == id).ToDomain();
+        public Taxi GetTaxi(int id)
+        {
+            if (id < 0) throw new ArgumentException(nameof(id));
+            return _taxis.First(t => t.TaxiId == id).ToDomain();
+        }
 
         public void SaveExistingTaxi(Taxi dbTaxi)
         {
+            if (dbTaxi == null) throw new ArgumentNullException(nameof(dbTaxi));
             var taxiInDb = _taxis.First(t => t.TaxiId == dbTaxi.TaxiId);
             taxiInDb.DriverName = dbTaxi.DriverName;
             taxiInDb.CurrentLocation = new DbLocation(dbTaxi.CurrentLocation);

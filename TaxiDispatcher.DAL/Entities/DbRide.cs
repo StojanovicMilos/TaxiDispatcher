@@ -14,13 +14,18 @@ namespace TaxiDispatcher.DAL.Entities
 
         public DbRide(int rideId, Ride ride)
         {
-            RideId = rideId;
+            if (ride == null) throw new ArgumentNullException(nameof(ride));
+            RideId = rideId >= 0 ? rideId : throw new ArgumentException(nameof(rideId));
             StartLocation = new DbLocation(ride.StartLocation);
             DestinationLocation = new DbLocation(ride.DestinationLocation);
             Price = ride.Price;
             RideDateTime = ride.RideDateTime;
         }
 
-        public Ride ToDomain(Taxi taxi) => new Ride(RideId, StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, Price);
+        public Ride ToDomain(Taxi taxi)
+        {
+            if (taxi == null) throw new ArgumentNullException(nameof(taxi));
+            return new Ride(RideId, StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, Price);
+        }
     }
 }

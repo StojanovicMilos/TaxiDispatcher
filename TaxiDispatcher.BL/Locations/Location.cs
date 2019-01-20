@@ -19,13 +19,13 @@ namespace TaxiDispatcher.BL.Locations
 
         public Location(Location otherLocation)
         {
+            if (otherLocation == null) throw new ArgumentNullException(nameof(otherLocation));
             CoordinateX = otherLocation.CoordinateX;
         }
 
         public int DistanceTo(Location otherLocation)
         {
-            if (otherLocation == null)
-                throw new ArgumentNullException(nameof(otherLocation));
+            if (otherLocation == null) throw new ArgumentNullException(nameof(otherLocation));
             return Math.Abs(CoordinateX - otherLocation.CoordinateX);
         }
 
@@ -34,7 +34,7 @@ namespace TaxiDispatcher.BL.Locations
             return CoordinateX.ToString();
         }
 
-        public City City => CoordinateX < 11 ? City.City1 : City.City2;
-
+        //Assumption: one city is from -infinity to 10, the other city is from 11 to +infinity
+        public City City => CoordinateX <= 10 ? City.City1 : City.City2;
     }
 }

@@ -29,7 +29,7 @@ namespace TaxiDispatcher.BL.Rides
 
         private int CalculateRidePriceMultiplier(DateTime rideDateTime)
         {
-            //Client shouldn't know and/or choose weather a ride is city or intercity. That's BL. Assumption: one town is from -infinity to 10, the other one is from 11 to +infinity
+            //Client shouldn't know and/or choose weather a ride is city or intercity. That's BL.
             bool cityRide = StartLocation.City == DestinationLocation.City;
 
             bool dayRide = rideDateTime.Hour >= 6 && rideDateTime.Hour <= 22;
