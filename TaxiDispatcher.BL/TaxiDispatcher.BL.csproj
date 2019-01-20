@@ -7,8 +7,8 @@
     <ProjectGuid>{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TaxiDispatcher.App</RootNamespace>
-    <AssemblyName>TaxiDispatcher.App</AssemblyName>
+    <RootNamespace>TaxiDispatcher.BL</RootNamespace>
+    <AssemblyName>TaxiDispatcher.BL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,10 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
-    <Compile Include="InMemoryRideDataBase.cs" />
+    <Compile Include="CustomExceptions\InvalidTaxiCompanyException.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Interfaces\IDatabase.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Locations\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scheduler.cs" />
+    <Compile Include="Rides\RideOrder.cs" />
+    <Compile Include="Rides\Ride.cs" />
+    <Compile Include="Interfaces\IScheduler.cs" />
+    <Compile Include="Rides\RideOrderResult.cs" />
+    <Compile Include="Schedulers\LoggingScheduler.cs" />
+    <Compile Include="Schedulers\Scheduler.cs" />
+    <Compile Include="Taxis\TaxiCompany.cs" />
+    <Compile Include="Taxis\TaxiEarningsLogger.cs" />
+    <Compile Include="Taxis\Taxi.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

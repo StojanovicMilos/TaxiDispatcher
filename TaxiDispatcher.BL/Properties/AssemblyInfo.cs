@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TaxiDispatcher.Client")]
+[assembly: AssemblyTitle("TaxiDispatcher.App")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TaxiDispatcher.Client")]
+[assembly: AssemblyProduct("TaxiDispatcher.App")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("14f48e4d-4692-4c47-96ce-6f1b92e7f06a")]
+[assembly: Guid("7c6332f4-4739-4f10-aa74-d5c4a9c342f4")]
 
 // Version information for an assembly consists of the following four values:
 //

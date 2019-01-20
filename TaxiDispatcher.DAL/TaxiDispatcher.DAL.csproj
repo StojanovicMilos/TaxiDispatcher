@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{14F48E4D-4692-4C47-96CE-6F1B92E7F06A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TaxiDispatcher.Client</RootNamespace>
-    <AssemblyName>TaxiDispatcher.Client</AssemblyName>
+    <ProjectGuid>{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TaxiDispatcher.DAL</RootNamespace>
+    <AssemblyName>TaxiDispatcher.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,21 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logging\ConsoleLogger.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Entities\DbLocation.cs" />
+    <Compile Include="Entities\DbRide.cs" />
+    <Compile Include="Entities\DbTaxi.cs" />
+    <Compile Include="InMemoryDataBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaxiDispatcher.BL\TaxiDispatcher.BL.csproj">
       <Project>{7C6332F4-4739-4F10-AA74-D5C4A9C342F4}</Project>
       <Name>TaxiDispatcher.BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TaxiDispatcher.DAL\TaxiDispatcher.DAL.csproj">
-      <Project>{EEAADF97-0A13-4D2D-8CE7-E81AAB9762C4}</Project>
-      <Name>TaxiDispatcher.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

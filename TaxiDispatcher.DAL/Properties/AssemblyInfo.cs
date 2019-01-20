@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TaxiDispatcher.App")]
+[assembly: AssemblyTitle("TaxiDispatcher.DAL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TaxiDispatcher.App")]
+[assembly: AssemblyProduct("TaxiDispatcher.DAL")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7c6332f4-4739-4f10-aa74-d5c4a9c342f4")]
+[assembly: Guid("eeaadf97-0a13-4d2d-8ce7-e81aab9762c4")]
 
 // Version information for an assembly consists of the following four values:
 //
