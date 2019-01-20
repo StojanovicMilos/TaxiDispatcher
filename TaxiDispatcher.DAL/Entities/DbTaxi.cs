@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Taxis;
 
@@ -13,22 +12,13 @@ namespace TaxiDispatcher.DAL.Entities
         public List<DbRide> Rides { get; set; }
         public string TaxiCompanyName { get; set; }
 
-        public DbTaxi(int taxiId, string taxiDriverName, DbLocation currentLocation, string taxiCompanyName)
+        public DbTaxi(int taxiId, string taxiDriverName, DbLocation currentLocation, List<DbRide> rides, string taxiCompanyName)
         {
             TaxiId = taxiId;
             DriverName = taxiDriverName;
             CurrentLocation = currentLocation;
-            Rides = new List<DbRide>();
+            Rides = rides;
             TaxiCompanyName = taxiCompanyName;
-        }
-
-        public DbTaxi(Taxi taxi)
-        {
-            TaxiId = taxi.TaxiId;
-            DriverName = taxi.DriverName;
-            CurrentLocation = new DbLocation(taxi.CurrentLocation);
-            Rides = new List<DbRide>(taxi.Rides.Select(r => new DbRide(r.RideId, r)));
-            TaxiCompanyName = taxi.TaxiCompany.Name;
         }
 
         public Taxi ToDomain()

@@ -12,10 +12,10 @@ namespace TaxiDispatcher.DAL
     {
         private static readonly List<DbTaxi> Taxis = new List<DbTaxi>
         {
-            new DbTaxi(taxiId: 1, taxiDriverName: "Predrag", currentLocation: new DbLocation(1), taxiCompanyName: "Naxi"),
-            new DbTaxi(taxiId: 2, taxiDriverName: "Nenad", currentLocation: new DbLocation(4), taxiCompanyName: "Naxi"),
-            new DbTaxi(taxiId: 3, taxiDriverName: "Dragan", currentLocation: new DbLocation(6), taxiCompanyName: "Alfa"),
-            new DbTaxi(taxiId: 4, taxiDriverName: "Goran", currentLocation: new DbLocation(7), taxiCompanyName: "Gold")
+            new DbTaxi(taxiId: 1, taxiDriverName: "Predrag", currentLocation: new DbLocation(1), rides: new List<DbRide>(), taxiCompanyName: "Naxi"),
+            new DbTaxi(taxiId: 2, taxiDriverName: "Nenad", currentLocation: new DbLocation(4), rides: new List<DbRide>(), taxiCompanyName: "Naxi"),
+            new DbTaxi(taxiId: 3, taxiDriverName: "Dragan", currentLocation: new DbLocation(6), rides: new List<DbRide>(), taxiCompanyName: "Alfa"),
+            new DbTaxi(taxiId: 4, taxiDriverName: "Goran", currentLocation: new DbLocation(7), rides: new List<DbRide>(), taxiCompanyName: "Gold")
         };
 
         private static readonly List<DbRide> Rides = new List<DbRide>();

@@ -7,9 +7,6 @@ namespace TaxiDispatcher.DAL.Entities
     {
         private readonly int _coordinateX;
 
-        public Location ToDomain() =>
-            new Location(_coordinateX);
-
         public DbLocation(int coordinateX)
         {
             _coordinateX = coordinateX;
@@ -20,5 +17,7 @@ namespace TaxiDispatcher.DAL.Entities
             if (location == null) throw new ArgumentNullException(nameof(location));
             _coordinateX = location.CoordinateX;
         }
+
+        public Location ToDomain() => new Location(_coordinateX);
     }
 }

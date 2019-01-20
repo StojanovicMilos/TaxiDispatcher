@@ -12,8 +12,6 @@ namespace TaxiDispatcher.DAL.Entities
         private int Price { get; }
         private DateTime RideDateTime { get; }
 
-        public Ride ToDomain(Taxi taxi) => new Ride(RideId, StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, Price);
-
         public DbRide(int rideId, Ride ride)
         {
             RideId = rideId;
@@ -22,5 +20,7 @@ namespace TaxiDispatcher.DAL.Entities
             Price = ride.Price;
             RideDateTime = ride.RideDateTime;
         }
+
+        public Ride ToDomain(Taxi taxi) => new Ride(RideId, StartLocation.ToDomain(), DestinationLocation.ToDomain(), RideDateTime, taxi, Price);
     }
 }
