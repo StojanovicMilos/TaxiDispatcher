@@ -1,5 +1,4 @@
 ﻿using System;
-using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.BL.Interfaces;
 using TaxiDispatcher.BL.Locations;
 using TaxiDispatcher.BL.Rides;
@@ -12,7 +11,6 @@ namespace TaxiDispatcher.Client
 {
     public class Program
     {
-        private static ILogger _logger;
         private static TaxiEarningsLogger _taxiEarningsLogger;
         private static IScheduler _scheduler;
 
@@ -26,18 +24,27 @@ namespace TaxiDispatcher.Client
 
         static void Main()
         {
-            ILogger logger = new ConsoleLogger();
-            IDatabase database = InMemoryDataBase.Instance;
-            IScheduler scheduler = new LoggingScheduler(logger, new Scheduler(database));
-            TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(database, logger);
-            ConfigureClient(logger, scheduler, taxiEarningsLogger);
-            RunClient();
-            Console.ReadLine();
+            try
+            {
+                ILogger logger = new ConsoleLogger();
+                IDatabase database = InMemoryDataBase.Instance;
+                IScheduler scheduler = new LoggingScheduler(logger, new Scheduler(database));
+                TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(database, logger);
+                ConfigureClient(scheduler, taxiEarningsLogger);
+                RunClient();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.ReadLine();
+            }
         }
 
-        public static void ConfigureClient(ILogger logger, IScheduler scheduler, TaxiEarningsLogger taxiEarningsLogger)
+        public static void ConfigureClient(IScheduler scheduler, TaxiEarningsLogger taxiEarningsLogger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _taxiEarningsLogger = taxiEarningsLogger ?? throw new ArgumentNullException(nameof(taxiEarningsLogger));
             _scheduler = scheduler ?? throw new ArgumentNullException(nameof(scheduler));
         }
@@ -52,22 +59,16 @@ namespace TaxiDispatcher.Client
         {
             foreach (var rideOrder in RideOrders)
             {
-                try
-                {
-                    PerformRide(rideOrder);
-                }
-                catch (NoAvailableTaxiVehiclesException e)
-                {
-                    _logger.WriteLine(e.Message + Environment.NewLine);
-                }
+                PerformRide(rideOrder);
             }
         }
 
         private static void PerformRide(RideOrder rideOrder)
         {
             if (rideOrder == null) throw new ArgumentNullException(nameof(rideOrder));
-            var ride = _scheduler.OrderRide(rideOrder);
-            _scheduler.AcceptRide(ride);
+            RideOrderResult rideOrderResult = _scheduler.OrderRide(rideOrder);
+            if (rideOrderResult.Success)
+                _scheduler.AcceptRide(rideOrderResult.Ride);
         }
 
         private static void LogTotalEarningsForTaxiWithId(int id) => _taxiEarningsLogger.LogTotalEarningsForTaxiWithId(id);

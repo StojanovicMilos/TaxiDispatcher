@@ -5,7 +5,7 @@ namespace TaxiDispatcher.BL.Interfaces
 {
     public interface IScheduler
     {
-        Ride OrderRide(RideOrder rideOrder);
+        RideOrderResult OrderRide(RideOrder rideOrder);
         Taxi AcceptRide(Ride ride);
     }
 }

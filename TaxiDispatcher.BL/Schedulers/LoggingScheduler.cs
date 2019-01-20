@@ -16,13 +16,20 @@ namespace TaxiDispatcher.BL.Schedulers
             _scheduler = scheduler ?? throw new ArgumentNullException(nameof(scheduler));
         }
 
-        public Ride OrderRide(RideOrder rideOrder)
+        public RideOrderResult OrderRide(RideOrder rideOrder)
         {
             if (rideOrder == null) throw new ArgumentNullException(nameof(rideOrder));
             _logger.WriteLine($"Ordering ride from {rideOrder.StartLocation} to {rideOrder.DestinationLocation}...");
-            var ride = _scheduler.OrderRide(rideOrder);
-            _logger.WriteLine("Ride ordered, price: " + ride.Price);
-            return ride;
+            RideOrderResult rideOrderResult = _scheduler.OrderRide(rideOrder);
+            if (rideOrderResult.Success)
+            {
+                _logger.WriteLine("Ride ordered, price: " + rideOrderResult.Ride.Price);
+            }
+            else
+            {
+                _logger.WriteLine(rideOrderResult.ErrorMessage);
+            }
+            return rideOrderResult;
         }
 
         public Taxi AcceptRide(Ride ride)

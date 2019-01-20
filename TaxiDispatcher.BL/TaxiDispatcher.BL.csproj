@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomExceptions\InvalidTaxiCompanyException.cs" />
-    <Compile Include="CustomExceptions\NoAvailableTaxiVehiclesException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Interfaces\IDatabase.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
@@ -51,6 +50,7 @@
     <Compile Include="Rides\RideOrder.cs" />
     <Compile Include="Rides\Ride.cs" />
     <Compile Include="Interfaces\IScheduler.cs" />
+    <Compile Include="Rides\RideOrderResult.cs" />
     <Compile Include="Schedulers\LoggingScheduler.cs" />
     <Compile Include="Schedulers\Scheduler.cs" />
     <Compile Include="Taxis\TaxiCompany.cs" />

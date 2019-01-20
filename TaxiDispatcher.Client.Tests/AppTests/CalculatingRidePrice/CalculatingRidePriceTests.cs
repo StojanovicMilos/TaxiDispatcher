@@ -18,7 +18,8 @@ namespace TaxiDispatcher.Tests.AppTests.CalculatingRidePrice
             Scheduler scheduler = new Scheduler(new TestDatabase());
 
             //Act
-            var ride = scheduler.OrderRide(rideOrder);
+            var rideOrderResult = scheduler.OrderRide(rideOrder);
+            var ride = rideOrderResult.Ride;
             scheduler.AcceptRide(ride);
 
             //Assert

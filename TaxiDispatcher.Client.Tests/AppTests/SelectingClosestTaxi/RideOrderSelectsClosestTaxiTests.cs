@@ -1,5 +1,4 @@
 ﻿using System;
-using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.BL.Rides;
 using TaxiDispatcher.BL.Schedulers;
 using TaxiDispatcher.Tests.HelperClasses;
@@ -19,7 +18,8 @@ namespace TaxiDispatcher.Tests.AppTests.SelectingClosestTaxi
             Scheduler scheduler = new Scheduler(new TestDatabase());
 
             //Act
-            var ride = scheduler.OrderRide(rideOrder);
+            var rideOrderResult = scheduler.OrderRide(rideOrder);
+            var ride = rideOrderResult.Ride;
             scheduler.AcceptRide(ride);
 
             //Assert
@@ -28,18 +28,18 @@ namespace TaxiDispatcher.Tests.AppTests.SelectingClosestTaxi
 
         [Theory]
         [MemberData(nameof(RideOrderSelectsClosestTaxiTestData.TooFarRideOrdersTestData), MemberType = typeof(RideOrderSelectsClosestTaxiTestData))]
-        public void GivenTooFarRideOrderSchedulerThrowsException(RideOrder rideOrder)
+        public void GivenTooFarRideOrderSchedulerDoesNotReturnTaxi(RideOrder rideOrder)
         {
             //Arrange
-            const string expectedExceptionMessage = "There are no available taxi vehicles!";
+            string expectedErrorMessage = "There are no available taxi vehicles!" + Environment.NewLine;
             Scheduler scheduler = new Scheduler(new TestDatabase());
 
             //Act
-            Action action = () => scheduler.OrderRide(rideOrder);
+            var rideOrderResult = scheduler.OrderRide(rideOrder);
 
             //Assert
-            var exception = Assert.Throws<NoAvailableTaxiVehiclesException>(action);
-            Assert.Equal(expectedExceptionMessage, exception.Message);
+            Assert.False(rideOrderResult.Success);
+            Assert.Equal(expectedErrorMessage, rideOrderResult.ErrorMessage);
         }
     }
 }

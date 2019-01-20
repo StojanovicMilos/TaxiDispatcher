@@ -1,5 +1,4 @@
 ﻿using System;
-using TaxiDispatcher.BL.CustomExceptions;
 using TaxiDispatcher.BL.Extensions;
 using TaxiDispatcher.BL.Interfaces;
 using TaxiDispatcher.BL.Locations;
@@ -17,11 +16,13 @@ namespace TaxiDispatcher.BL.Schedulers
             _database = database ?? throw new ArgumentNullException(nameof(database));
         }
 
-        public Ride OrderRide(RideOrder rideOrder)
+        public RideOrderResult OrderRide(RideOrder rideOrder)
         {
             if (rideOrder == null) throw new ArgumentNullException(nameof(rideOrder));
             Taxi closestTaxi = FindClosestTaxi(rideOrder.StartLocation);
-            return new Ride(rideOrder, closestTaxi);
+            if (closestTaxi.DistanceTo(rideOrder.StartLocation) > MaximumOrderDistance)
+                return new RideOrderResult("There are no available taxi vehicles!" + Environment.NewLine);
+            return new RideOrderResult(new Ride(rideOrder, closestTaxi));
         }
 
         private const int MaximumOrderDistance = 15;
@@ -30,10 +31,7 @@ namespace TaxiDispatcher.BL.Schedulers
         {
             if (startLocation == null) throw new ArgumentNullException(nameof(startLocation));
             var allTaxis = _database.GetAllTaxis();
-            var closestTaxi = allTaxis.WithMinimum(t => t.DistanceTo(startLocation));
-            if (closestTaxi.DistanceTo(startLocation) > MaximumOrderDistance)
-                throw new NoAvailableTaxiVehiclesException();
-            return closestTaxi;
+            return allTaxis.WithMinimum(t => t.DistanceTo(startLocation));
         }
 
         public Taxi AcceptRide(Ride ride)
