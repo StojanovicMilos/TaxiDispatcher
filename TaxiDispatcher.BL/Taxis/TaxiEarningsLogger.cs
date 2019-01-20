@@ -5,10 +5,10 @@ namespace TaxiDispatcher.BL.Taxis
 {
     public class TaxiEarningsLogger
     {
-        private readonly IDatabase _database;
         private readonly ILogger _logger;
+        private readonly IDatabase _database;
 
-        public TaxiEarningsLogger(IDatabase database, ILogger logger)
+        public TaxiEarningsLogger(ILogger logger, IDatabase database)
         {
             _database = database ?? throw new ArgumentNullException(nameof(database));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

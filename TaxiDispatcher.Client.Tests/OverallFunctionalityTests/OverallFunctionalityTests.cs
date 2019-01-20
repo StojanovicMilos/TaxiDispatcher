@@ -17,7 +17,7 @@ namespace TaxiDispatcher.Tests.OverallFunctionalityTests
             TestLogger logger = new TestLogger();
             TestDatabase testDatabase = new TestDatabase();
             IScheduler testDatabaseScheduler = new LoggingScheduler(logger, new Scheduler(testDatabase));
-            TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(testDatabase, logger);
+            TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(logger, testDatabase);
             Program.ConfigureClient(testDatabaseScheduler, taxiEarningsLogger);
             string expectedMessages = "Ordering ride from 5 to 0..." + Environment.NewLine + "Ride ordered, price: 100" + Environment.NewLine + 
                                       "Ride accepted, waiting for driver: Nenad" + Environment.NewLine + Environment.NewLine + 

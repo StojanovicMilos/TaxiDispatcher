@@ -29,7 +29,7 @@ namespace TaxiDispatcher.Client
                 ILogger logger = new ConsoleLogger();
                 IDatabase database = InMemoryDataBase.Instance;
                 IScheduler scheduler = new LoggingScheduler(logger, new Scheduler(database));
-                TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(database, logger);
+                TaxiEarningsLogger taxiEarningsLogger = new TaxiEarningsLogger(logger, database);
                 ConfigureClient(scheduler, taxiEarningsLogger);
                 RunClient();
             }
