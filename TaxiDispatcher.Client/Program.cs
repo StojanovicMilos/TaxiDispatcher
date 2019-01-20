@@ -51,8 +51,15 @@ namespace TaxiDispatcher.Client
 
         public static void RunClient()
         {
+            CheckIfClientIsConfigured();
             PerformRides();
             LogTotalEarningsForTaxiWithId(2);
+        }
+
+        private static void CheckIfClientIsConfigured()
+        {
+            if (_scheduler == null || _taxiEarningsLogger == null)
+                throw new Exception("Client is not configured!");
         }
 
         private static void PerformRides()
